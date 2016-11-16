@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  .screen
+    .spaceship.hide
+    .ui
+      .pause
+        .button.buttonPause.hide ||
+      .score
+      .menu
+        .title SpaceInvaders
+        .logo
+          img(src="/images/logo.png")
+        .win.hide You Win !!!
+        .loose.hide You Loose !!!
+        .buttons
+          .button.buttonStart Start
+          .button.buttonReStart.hide reStart
+          .button.buttonContinue.hide Continue
