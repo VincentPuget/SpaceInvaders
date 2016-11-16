@@ -1,0 +1,33 @@
+{
+  "rules":
+  {
+    "no-underscore-dangle": 0,
+    "no-console": 1,
+    "no-unused-vars": 0,
+    "no-use-before-define": 0,
+    "no-inner-declarations": 0,
+    "quotes": [1, "double"],
+    "space-infix-ops": [2, {"int32Hint": false}],
+    "strict": [2, "global"],
+    "comma-dangle": [2, "never"],
+    "no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+    "key-spacing": [1, {"beforeColon": false, "afterColon": true}],
+    "eqeqeq": [2, "smart"],
+    "no-irregular-whitespace": 2,
+    "no-multi-spaces": 1,
+    "no-trailing-spaces": 1,
+    "no-spaced-func": 2,
+    "semi": [1, "always"]
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "app": true,
+    "_": false
+  },
+  "extends": "eslint:recommended"
+}
