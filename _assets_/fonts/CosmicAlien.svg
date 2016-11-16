@@ -1,0 +1,252 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg>
+<metadata>
+Created by FontForge 20090622 at Sun Nov  6 20:33:36 2016
+ By deploy user
+Copyright (c) 2001by ck! [freakyfonts]. All rights reserved.
+</metadata>
+<defs>
+<font id="CosmicAlien" horiz-adv-x="750" >
+  <font-face 
+    font-family="Cosmic Alien"
+    font-weight="400"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 0 0 0 0 0 0 0 0"
+    ascent="800"
+    descent="-200"
+    x-height="624"
+    cap-height="625"
+    bbox="0 -125 1500 875"
+    underline-thickness="50"
+    underline-position="-75"
+    unicode-range="U+0020-U+00FC"
+  />
+<missing-glyph horiz-adv-x="500" 
+ />
+    <glyph glyph-name=".notdef" horiz-adv-x="500" 
+ />
+    <glyph glyph-name="space" unicode=" " 
+ />
+    <glyph glyph-name="exclam" unicode="!" horiz-adv-x="625" 
+d="M125 500h-125v-125h125v-125h250v125h125v125h-125v125h-250v-125zM375 0v125h-250v-125h250z" />
+    <glyph glyph-name="quotedbl" unicode="&#x22;" 
+d="M500 500h125v250h-125v-250zM250 500h125v250h-125v-250z" />
+    <glyph glyph-name="numbersign" unicode="#" 
+d="M0 500v-125h125v-125h-125v-125h125v-125h125v125h125v-125h125v125h125v125h-125v125h125v125h-125v125h-125v-125h-125v125h-125v-125h-125zM250 250v125h125v-125h-125z" />
+    <glyph glyph-name="dollar" unicode="$" 
+d="M250 0v-125h125v125h250v375h-250v125h250v125h-250v125h-125v-125h-250v-375h250v-125h-250v-125h250zM250 375h-125v125h125v-125zM500 250v-125h-125v125h125z" />
+    <glyph glyph-name="percent" unicode="%" 
+d="M250 375v250h-250v-250h250v-125h125v125h-125zM375 250v-250h250v250h-250zM500 375v125h-125v-125h125zM500 625v-125h125v125h-125zM0 125v-125h125v125h-125zM250 250h-125v-125h125v125z" />
+    <glyph glyph-name="ampersand" unicode="&#x26;" 
+d="M375 500v-125h-250v125h-125v-125h125v-125h-125v-125h125v-125h250v125h-250v125h250v-125h125v-125h125v125h-125v125h125v125h-125v125h-125zM375 500v125h-250v-125h250z" />
+    <glyph glyph-name="quotesingle" unicode="'" 
+d="M625 750v-125h-125v-125h-250v125h125v125h250z" />
+    <glyph glyph-name="parenleft" unicode="(" 
+d="M250 625v-125h-125v-375h125v-125h375v125h-250v375h250v125h-375z" />
+    <glyph glyph-name="parenright" unicode=")" 
+d="M375 0v125h125v375h-125v125h-375v-125h250v-375h-250v-125h375z" />
+    <glyph glyph-name="asterisk" unicode="*" 
+d="M125 250v-125h125v-125h125v125h125v125h125v125h-125v125h-125v125h-125v-125h-125v125h-125v-125h125v-125h-125v-125h125zM500 500h125v125h-125v-125zM500 125v-125h125v125h-125zM0 125v-125h125v125h-125z" />
+    <glyph glyph-name="plus" unicode="+" 
+d="M625 250v125h-250v250h-125v-250h-250v-125h250v-250h125v250h250z" />
+    <glyph glyph-name="comma" unicode="," 
+d="M250 0h-125v-125h250v125h125v250h-250v-250z" />
+    <glyph glyph-name="hyphen" unicode="-" 
+d="M625 250v125h-625v-125h625z" />
+    <glyph glyph-name="period" unicode="." 
+d="M250 0h250v250h-250v-250z" />
+    <glyph glyph-name="slash" unicode="/" 
+d="M250 250h-125v-125h-125v-125h250v125h125v125h125v125h125v250h-125v-125h-125v-125h-125v-125z" />
+    <glyph glyph-name="zero" unicode="0" 
+d="M625 0v625h-625v-625h625zM125 500h375v-375h-250v250h-125v125z" />
+    <glyph glyph-name="one" unicode="1" horiz-adv-x="625" 
+d="M500 0v375h-125v250h-125v-625h250z" />
+    <glyph glyph-name="two" unicode="2" 
+d="M625 250h-375v-125h375v-125h-625v375h500v125h-500v125h625v-375z" />
+    <glyph glyph-name="three" unicode="3" 
+d="M375 250v-125h-375v-125h625v375h-125v250h-500v-125h375v-125h-375v-125h375z" />
+    <glyph glyph-name="four" unicode="4" 
+d="M0 250h250v-250h250v250h125v125h-250v250h-125v-250h-125v250h-125v-375z" />
+    <glyph glyph-name="five" unicode="5" 
+d="M0 250h375v-125h-375v-125h625v375h-500v125h500v125h-625v-375z" />
+    <glyph glyph-name="six" unicode="6" 
+d="M0 625v-625h625v375h-500v125h500v125h-625zM375 250v-125h-249v125h249z" />
+    <glyph glyph-name="seven" unicode="7" 
+d="M625 0v375h-125v250h-500v-125h375v-500h250z" />
+    <glyph glyph-name="eight" unicode="8" 
+d="M0 500v-500h625v375h-125v250h-500v-125zM375 250v-125h-250v125h250zM375 500v-125h-250v125h250z" />
+    <glyph glyph-name="nine" unicode="9" 
+d="M375 250v-125h-375v-125h625v375h-125v250h-500v-375h375zM375 500v-125h-249v125h249z" />
+    <glyph glyph-name="colon" unicode=":" 
+d="M250 0h250v250h-250v-250zM250 375h250v250h-250v-250z" />
+    <glyph glyph-name="semicolon" unicode=";" 
+d="M250 0h-125v-125h250v125h125v250h-250v-250zM250 375h250v125h-250v-125z" />
+    <glyph glyph-name="less" unicode="&#x3c;" 
+d="M125 250h125v-125h125v-125h250v125h-125v125h-125v125h125v125h125v125h-250v-125h-125v-125h-125v-125z" />
+    <glyph glyph-name="equal" unicode="=" 
+d="M625 125v125h-625v-125h625zM625 375v125h-625v-125h625z" />
+    <glyph glyph-name="greater" unicode="&#x3e;" 
+d="M500 250h-125v-125h-125v-125h-250v125h125v125h125v125h-125v125h-125v125h250v-125h125v-125h125v-125z" />
+    <glyph glyph-name="question" unicode="?" horiz-adv-x="625" 
+d="M0 500h250v-125h-125v-125h250v125h125v125h-125v125h-375v-125zM375 0v125h-250v-125h250z" />
+    <glyph glyph-name="at" unicode="@" 
+d="M375 250h250v250h-125v125h-375v-125h-125v-375h125v-125h500v125h-375v375h250v-125h-125v-125z" />
+    <glyph glyph-name="A" unicode="A" 
+d="M0 0h250v250h250v-250h125v625h-625v-625zM125 500h375v-125h-375v125z" />
+    <glyph glyph-name="B" unicode="B" 
+d="M125 500h375v-125h125v125h-125v125h-500v-625h500v125h-250v125h250v-125h125v125h-125v125h-375v125z" />
+    <glyph glyph-name="C" unicode="C" 
+d="M625 500v125h-625v-625h625v125h-375v250h-125v125h500z" />
+    <glyph glyph-name="D" unicode="D" 
+d="M500 125h125v375h-125v125h-500v-625h500v125zM125 500h375v-375h-250v250h-125v125z" />
+    <glyph glyph-name="E" unicode="E" 
+d="M625 375h-500v125h500v125h-625v-625h625v125h-375v125h375v125z" />
+    <glyph glyph-name="F" unicode="F" 
+d="M250 0v250h375v125h-500v125h500v125h-625v-625h250z" />
+    <glyph glyph-name="G" unicode="G" 
+d="M375 375v-125h125v-125h-250v250h-125v125h500v125h-625v-625h625v375h-250z" />
+    <glyph glyph-name="H" unicode="H" 
+d="M500 625v-250h-375v250h-125v-625h250v250h250v-250h125v625h-125z" />
+    <glyph glyph-name="I" unicode="I" 
+d="M250 125h-250v-125h625v125h-125v250h-125v125h250v125h-625v-125h250v-375z" />
+    <glyph glyph-name="J" unicode="J" 
+d="M0 500h500v-125h-125v-250h-250v125h-125v-250h625v625h-625v-125z" />
+    <glyph glyph-name="K" unicode="K" 
+d="M500 125v-125h125v125h-125v125h-125v125h125v125h-125v-125h-250v250h-125v-625h250v250h125v-125h125zM625 500v125h-125v-125h125z" />
+    <glyph glyph-name="L" unicode="L" 
+d="M126 625h-126v-625h625v125h-375v250h-125z" />
+    <glyph glyph-name="M" unicode="M" 
+d="M125 0v250h125v-125h125v375h125v-500h125v625h-625v-625h125z" />
+    <glyph glyph-name="N" unicode="N" 
+d="M125 500h375v-500h125v625h-625v-625h250v375h-125v125z" />
+    <glyph glyph-name="O" unicode="O" 
+d="M625 0v625h-625v-625h625zM125 500h375v-375h-250v250h-125v125z" />
+    <glyph glyph-name="P" unicode="P" 
+d="M625 250v375h-625v-625h250v250h375zM500 375h-375v125h375v-125z" />
+    <glyph glyph-name="Q" unicode="Q" 
+d="M625 0v625h-625v-625h625zM375 250v-125h-125v250h-125v125h375v-250h-125z" />
+    <glyph glyph-name="R" unicode="R" 
+d="M500 125v125h125v375h-625v-625h250v250h125v-125h125zM500 375h-375v125h375v-125zM500 125v-125h125v125h-125z" />
+    <glyph glyph-name="S" unicode="S" 
+d="M0 250h375v-125h-375v-125h625v375h-500v125h500v125h-625v-375z" />
+    <glyph glyph-name="T" unicode="T" 
+d="M625 625h-625v-125h250v-500h250v375h-125v125h250v125z" />
+    <glyph glyph-name="U" unicode="U" 
+d="M0 0h625v625h-125v-500h-250v250h-125v250h-125v-625z" />
+    <glyph glyph-name="V" unicode="V" 
+d="M125 375v-250h125v-125h125v125h125v250h125v250h-125v-125h-125v-250h-125v250h-125v125h-125v-250h125z" />
+    <glyph glyph-name="W" unicode="W" 
+d="M125 624v-250h125v125h125v-375h125v500h125v-625h-625v625h125z" />
+    <glyph glyph-name="X" unicode="X" 
+d="M0 125v-125h250v126h125v-126h250v125h-125v125h-125v125h125v125h125v125h-250v-126h-125v126h-250v-125h125v-125h125v-125h-125v-125h-125z" />
+    <glyph glyph-name="Y" unicode="Y" 
+d="M375 249v126h125v125h125v125h-250v-126h-125v126h-250v-125h125v-125h125v-375h250v250z" />
+    <glyph glyph-name="Z" unicode="Z" 
+d="M500 375h125v250h-625v-125h375v-125h-125v-125h-125v-125h-125v-125h625v125h-250v125h125v125z" />
+    <glyph glyph-name="bracketleft" unicode="[" 
+d="M125 625v-625h500v125h-250v375h250v125h-500z" />
+    <glyph glyph-name="backslash" unicode="\" 
+d="M500 250h125v-250h-125v125h-125v125h-125v125h-125v125h-125v125h250v-125h125v-125h125v-125z" />
+    <glyph glyph-name="bracketright" unicode="]" 
+d="M500 0v625h-500v-125h250v-376h-250v-124h500z" />
+    <glyph glyph-name="asciicircum" unicode="^" 
+d="M500 750v-125h125v-125h-250v125h-125v-125h-250v125h125v125h375z" />
+    <glyph glyph-name="underscore" unicode="_" 
+d="M625 -125v125h-625v-125h625z" />
+    <glyph glyph-name="grave" unicode="`" 
+d="M500 750v-125h125v-125h-250v125h-125v125h250z" />
+    <glyph glyph-name="a" unicode="a" 
+d="M0 0h250v250h250v-250h125v625h-625v-625zM125 500h375v-125h-375v125z" />
+    <glyph glyph-name="b" unicode="b" 
+d="M125 500h375v-125h125v125h-125v125h-500v-625h500v125h-250v125h250v-125h125v125h-125v125h-375v125z" />
+    <glyph glyph-name="c" unicode="c" 
+d="M625 500v125h-625v-625h625v125h-375v250h-125v125h500z" />
+    <glyph glyph-name="d" unicode="d" 
+d="M500 125h125v375h-125v125h-500v-625h500v125zM125 500h375v-375h-250v250h-125v125z" />
+    <glyph glyph-name="e" unicode="e" 
+d="M625 375h-500v125h500v125h-625v-625h625v125h-375v125h375v125z" />
+    <glyph glyph-name="f" unicode="f" 
+d="M250 0v250h375v125h-500v125h500v125h-625v-625h250z" />
+    <glyph glyph-name="g" unicode="g" 
+d="M375 375v-125h125v-125h-250v250h-125v125h500v125h-625v-625h625v375h-250z" />
+    <glyph glyph-name="h" unicode="h" 
+d="M500 625v-250h-375v250h-125v-625h250v250h250v-250h125v625h-125z" />
+    <glyph glyph-name="i" unicode="i" 
+d="M250 125h-250v-125h625v125h-125v250h-125v125h250v125h-625v-125h250v-375z" />
+    <glyph glyph-name="j" unicode="j" 
+d="M0 500h500v-125h-125v-250h-250v125h-125v-250h625v625h-625v-125z" />
+    <glyph glyph-name="k" unicode="k" 
+d="M500 125v-125h125v125h-125v125h-125v125h125v125h-125v-125h-250v250h-125v-625h250v250h125v-125h125zM625 500v125h-125v-125h125z" />
+    <glyph glyph-name="l" unicode="l" 
+d="M126 625h-126v-625h625v125h-375v250h-125z" />
+    <glyph glyph-name="m" unicode="m" 
+d="M125 0v250h125v-125h125v375h125v-500h125v625h-625v-625h125z" />
+    <glyph glyph-name="n" unicode="n" 
+d="M125 500h375v-500h125v625h-625v-625h250v375h-125v125z" />
+    <glyph glyph-name="o" unicode="o" 
+d="M625 0v625h-625v-625h625zM125 500h375v-375h-250v250h-125v125z" />
+    <glyph glyph-name="p" unicode="p" 
+d="M625 250v375h-625v-625h250v250h375zM500 375h-375v125h375v-125z" />
+    <glyph glyph-name="q" unicode="q" 
+d="M625 0v625h-625v-625h625zM375 250v-125h-125v250h-125v125h375v-250h-125z" />
+    <glyph glyph-name="r" unicode="r" 
+d="M500 125v125h125v375h-625v-625h250v250h125v-125h125zM500 375h-375v125h375v-125zM500 125v-125h125v125h-125z" />
+    <glyph glyph-name="s" unicode="s" 
+d="M0 250h375v-125h-375v-125h625v375h-500v125h500v125h-625v-375z" />
+    <glyph glyph-name="t" unicode="t" 
+d="M625 625h-625v-125h250v-500h250v375h-125v125h250v125z" />
+    <glyph glyph-name="u" unicode="u" 
+d="M0 0h625v625h-125v-500h-250v250h-125v250h-125v-625z" />
+    <glyph glyph-name="v" unicode="v" 
+d="M125 375v-250h125v-125h125v125h125v250h125v250h-125v-125h-125v-250h-125v250h-125v125h-125v-250h125z" />
+    <glyph glyph-name="w" unicode="w" 
+d="M125 624v-250h125v125h125v-375h125v500h125v-625h-625v625h125z" />
+    <glyph glyph-name="x" unicode="x" 
+d="M0 125v-125h250v126h125v-126h250v125h-125v125h-125v125h125v125h125v125h-250v-126h-125v126h-250v-125h125v-125h125v-125h-125v-125h-125z" />
+    <glyph glyph-name="y" unicode="y" 
+d="M375 249v126h125v125h125v125h-250v-126h-125v126h-250v-125h125v-125h125v-375h250v250z" />
+    <glyph glyph-name="z" unicode="z" 
+d="M500 375h125v250h-625v-125h375v-125h-125v-125h-125v-125h-125v-125h625v125h-250v125h125v125z" />
+    <glyph glyph-name="braceleft" unicode="{" 
+d="M0 375v-125h125v-250h500v125h-250v375h250v125h-500v-250h-125z" />
+    <glyph glyph-name="bar" unicode="|" horiz-adv-x="625" 
+d="M375 0v625h-250v-625h250z" />
+    <glyph glyph-name="braceright" unicode="}" 
+d="M500 0v250h125v125h-125v250h-500v-125h250v-376h-250v-124h500z" />
+    <glyph glyph-name="Adieresis" unicode="&#xc4;" 
+d="M0 0h250v250h250v-250h125v625h-625v-625zM125 500h375v-125h-375v125zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+    <glyph glyph-name="Ecircumflex" unicode="&#xca;" horiz-adv-x="1500" 
+d="M0 750v-500h125v-125h125v-125h125v125h625v-125h125v-125h125v125h-125v125h125v125h125v500h-125v-250h-125v125h-125v125h-125v-125h-375v125h-125v125h-125v-125h125v-125h-125v-125h-125v250h-125zM500 500v-125h-125v125h125zM875 500h125v-125h-125v125zM1125 750
+v125h-125v-125h125zM125 0v-125h125v125h-125z" />
+    <glyph glyph-name="Edieresis" unicode="&#xcb;" horiz-adv-x="1500" 
+d="M0 375v-375h125v250h125v-250h125v-125h250v125h-250v125h625v-125h-250v-125h250v125h125v250h125v-250h125v375h-125v125h-125v125h-125v125h125v125h-125v-125h-125v-125h-375v125h-125v125h-125v-125h125v-125h-125v-125h-125v-125h-125zM875 500h125v-125h-125v125z
+M375 500h125v-125h-125v125z" />
+    <glyph glyph-name="Igrave" unicode="&#xcc;" horiz-adv-x="1125" 
+d="M1000 0v125h-125v125h125v250h-125v125h-125v125h-125v125h-250v-125h-125v-125h-125v-125h-125v-250h125v-125h125v125h125v-125h250v125h125v-125h125v-125h125zM0 125v-125h125v-125h125v125h-125v125h-125zM250 500h125v-125h-125v125zM750 0v-125h125v125h-125z
+M625 500h125v-125h-125v125z" />
+    <glyph glyph-name="Iacute" unicode="&#xcd;" horiz-adv-x="1125" 
+d="M875 0v-125h125v125h-125v125h-125v125h250v250h-125v125h-125v125h-125v125h-250v-125h-125v-125h-125v-125h-125v-250h250v-125h125v-125h250v125h-250v125h250v-125h125v-125h125zM0 0v-125h125v125h-125zM625 500h125v-125h-125v125zM250 500h125v-125h-125v125z
+M250 0v125h-125v-125h125zM250 0v-125h125v125h-125zM625 0v-125h125v125h-125z" />
+    <glyph glyph-name="Icircumflex" unicode="&#xce;" horiz-adv-x="1625" 
+d="M1250 0v-125h250v125h-250v125h-125v125h375v375h-125v125h-375v125h-500v-125h-375v-125h-125v-375h375v-125h-125v-125h250v125h125v-125h250v125h-250v125h250v-125h124v-125h251zM250 0h-250v-125h250v125zM375 500h250v-125h-250v125zM875 500h249v-125h-249v125z
+" />
+    <glyph glyph-name="Idieresis" unicode="&#xcf;" horiz-adv-x="1625" 
+d="M1000 0v-125h250v125h125v125h-125v125h250v375h-125v125h-375v125h-500v-125h-375v-125h-125v-375h250v-125h-125v-125h125v-125h250v125h-125v125h250v-125h250v125h-250v125h250v-125h250v-125h-125zM375 500h250v-125h-250v125zM875 500h249v-125h-249v125z" />
+    <glyph glyph-name="Odieresis" unicode="&#xd6;" 
+d="M625 0v625h-625v-625h625zM125 500h375v-375h-250v250h-125v125zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+    <glyph glyph-name="Udieresis" unicode="&#xdc;" 
+d="M0 0h625v625h-125v-500h-250v250h-125v250h-125v-625zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+    <glyph glyph-name="germandbls" unicode="&#xdf;" 
+d="M0 -125h250v125h250v125h-250v125h250v-125h125v125h-125v125h-375v125h375v-125h125v125h-125v125h-500v-750z" />
+    <glyph glyph-name="adieresis" unicode="&#xe4;" 
+d="M0 0h250v250h250v-250h125v625h-625v-625zM125 500h375v-125h-375v125zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+    <glyph glyph-name="odieresis" unicode="&#xf6;" 
+d="M625 0v625h-625v-625h625zM125 500h375v-375h-250v250h-125v125zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+    <glyph glyph-name="divide" unicode="&#xf7;" 
+d="M625 250v125h-625v-125h625zM250 499h125v126h-125v-126zM375 0v126h-125v-126h125z" />
+    <glyph glyph-name="udieresis" unicode="&#xfc;" 
+d="M0 0h625v625h-125v-500h-250v250h-125v250h-125v-625zM0 750h250v125h-250v-125zM375 750h250v125h-250v-125z" />
+  </font>
+</defs></svg>
