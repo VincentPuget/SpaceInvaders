@@ -51,9 +51,7 @@ let boumWidth = 55,
 
 let bulletTimeout = null;
 let bullets = [];
-
 let monsters = [];
-
 let monsterBombs = [];
 
 let spaceship = {
@@ -129,7 +127,7 @@ function update() {
   moveSpaceship();
   moveBullets();
   moveMonsters();
-  chooseMonsterFoBombing();
+  chooseMonsterForBombing();
   moveBombMonster();
   spaceshipFire();
   containSpaceships();
@@ -146,7 +144,7 @@ function getRandomInt(min, max)
   return random;
 }
 
-function chooseMonsterFoBombing(){
+function chooseMonsterForBombing(){
   var rand = getRandomInt(1, 1000);
   var randMonster = getRandomInt(1, monsters.length - 1);
   if(rand < 10){
