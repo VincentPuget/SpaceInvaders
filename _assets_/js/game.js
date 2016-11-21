@@ -33,6 +33,11 @@ let monsterBombWidth = 15,
     monsterBombHeight = 21,
     monsterBombSpeed = 1;
 
+let bonusWidth = 35,
+    bonusHeight = 35,
+    bonusSpeed = 1,
+    bonusTripleFire = false;
+
 let monsterWidth = 55,
     monsterHeight = 40,
     monsterSpeed = 0.5,
@@ -53,6 +58,7 @@ let bulletTimeout = null;
 let bullets = [];
 let monsters = [];
 let monsterBombs = [];
+let bonuss = [];
 
 let spaceship = {
   elem: document.querySelector(".spaceship"),
@@ -108,6 +114,7 @@ let loose = {
 function init() {
   bullets = [];
   monsterBombs = [];
+  bonuss = [];
   score.value = 0;
   showElement(spaceship);
   createMonsters();
@@ -129,12 +136,16 @@ function update() {
   moveMonsters();
   chooseMonsterForBombing();
   moveBombMonster();
+  randomBonus();
+  moveBonus();
   spaceshipFire();
   containSpaceships();
   checkCollisions();
   checkMonsterPosition();
   deleteOutBullet();
   deleteOutMonsterBombs();
+  deleteOutBonus();
+
   checkWinState();
 }
 
@@ -146,23 +157,38 @@ function getRandomInt(min, max)
 
 function chooseMonsterForBombing(){
   var rand = getRandomInt(1, 1000);
-  var randMonster = getRandomInt(1, monsters.length - 1);
   if(rand < 10){
+    var randMonster = getRandomInt(1, monsters.length - 1);
     createMonsterBomb(monsters[randMonster]);
+  }
+}
+
+function randomBonus(){
+  var rand = getRandomInt(1, 1000);
+  if(rand < 10 && bonuss.length < 2){
+    createBonus();
   }
 }
 
 function render() {
   spaceship.elem.style.transform = "translate(" + spaceship.x + "px, " + spaceship.y + "px)";
+
   _.forEach(bullets, (bullet) => {
     bullet.elem.style.transform = "translate(" + bullet.x + "px, " + bullet.y + "px)";
   });
+
   _.forEach(monsters, (monster) => {
     monster.elem.style.transform = "translate(" + monster.x + "px, " + monster.y + "px)";
   });
+
   _.forEach(monsterBombs, (monsterBomb) => {
     monsterBomb.elem.style.transform = "translate(" + monsterBomb.x + "px, " + monsterBomb.y + "px)";
   });
+
+  _.forEach(bonuss, (bonus) => {
+    bonus.elem.style.transform = "translate(" + bonus.x + "px, " + bonus.y + "px)";
+  });
+
   score.elem.innerHTML = "Score : " + score.value;
 }
 
@@ -183,22 +209,62 @@ function containSpaceships() {
 }
 
 
+function generateBullet(position){
+  let positionX;
+  let positionY;
+  switch (position) {
+    case "left":
+      positionX = spaceship.x + spaceship.width / 2 - 1 - 14;
+      positionY = spaceship.y - bulletHeight + 20;
+      break;
+    case "center":
+      positionX = spaceship.x + spaceship.width / 2 - 1;
+      positionY = spaceship.y - bulletHeight;
+      break;
+    case "right":
+      positionX = spaceship.x + spaceship.width / 2 - 1 + 14;
+      positionY = spaceship.y - bulletHeight + 20;
+      break;
+    default:
+      positionX = spaceship.x + spaceship.width / 2 - 1;
+      positionY = spaceship.y - bulletHeight;
+      break;
+  }
+  let bullet = {
+    elem: document.createElement("div"),
+    x: positionX,
+    y: positionY,
+    width: bulletWidth,
+    height: bulletHeight,
+    speed: bulletHeight
+  };
+  bullet.elem.className = "bullet";
+  bullet.elem.style.width = bullet.width + "px";
+  bullet.elem.style.height = bullet.height + "px";
+  bullet.elem.style.background = "white";
+  return bullet;
+}
+
 function spaceshipFire() {
   if(spaceship.fire && bulletTimeout === null){
-    let bullet = {
-      elem: document.createElement("div"),
-      x: spaceship.x + spaceship.width / 2 - 1,
-      y: spaceship.y - bulletHeight,
-      width: bulletWidth,
-      height: bulletHeight,
-      speed: bulletHeight
-    };
-    bullet.elem.className = "bullet";
-    bullet.elem.style.width = bullet.width + "px";
-    bullet.elem.style.height = bullet.height + "px";
-    bullet.elem.style.background = "white";
-    spaceship.elem.parentNode.insertBefore(bullet.elem, spaceship.elem);
+    let bullet = generateBullet("center");
+    if(spaceship !== null && spaceship.elem !== null && bullet !== null && bullet.element !== null){
+      spaceship.elem.parentNode.insertBefore(bullet.elem, spaceship.elem);
+    }
     bullets.push(bullet);
+
+    if(bonusTripleFire){
+      let bulletLeft = generateBullet("left");
+      if(spaceship !== null && spaceship.elem !== null && bulletLeft !== null && bulletLeft.element !== null){
+        spaceship.elem.parentNode.insertBefore(bulletLeft.elem, spaceship.elem);
+      }
+      bullets.push(bulletLeft);
+      let bulletRight = generateBullet("right");
+      if(spaceship !== null && spaceship.elem !== null && bulletRight !== null && bulletRight.element !== null){
+        spaceship.elem.parentNode.insertBefore(bulletRight.elem, spaceship.elem);
+      }
+      bullets.push(bulletRight);
+    }
     bulletTimeout = setTimeout(() => {
       clearTimeout(bulletTimeout);
       bulletTimeout = null;
@@ -227,7 +293,9 @@ function createMonsters(){
         monster.elem.className = "monster";
         monster.elem.style.width = monster.width + "px";
         monster.elem.style.height = monster.height + "px";
-        spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
+        if(spaceship !== null && spaceship.elem !== null && monster !== null && monster.element !== null){
+          spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
+        }
         monsters.push(monster);
         totalMonster += 1;
       }
@@ -248,7 +316,9 @@ function createBoum(element){
   boum.elem.className = "boum";
   boum.elem.style.width = boum.width + "px";
   boum.elem.style.height = boum.height + "px";
-  element.elem.parentNode.insertBefore(boum.elem, element.elem);
+  if(element !== null && element.elem !== null && boum !== null && boum.element !== null){
+    element.elem.parentNode.insertBefore(boum.elem, element.elem);
+  }
   boum.elem.style.transform = "translate(" + boum.x + "px, " + boum.y + "px)";
   setTimeout(() => {
     boum.elem.remove();
@@ -268,7 +338,9 @@ function createMiniBoum(element){
   miniBoum.elem.className = "miniBoum";
   miniBoum.elem.style.width = miniBoum.width + "px";
   miniBoum.elem.style.height = miniBoum.height + "px";
-  element.elem.parentNode.insertBefore(miniBoum.elem, element.elem);
+  if(element !== null && element.elem !== null && miniBoum !== null && miniBoum.element !== null){
+    element.elem.parentNode.insertBefore(miniBoum.elem, element.elem);
+  }
   miniBoum.elem.style.transform = "translate(" + miniBoum.x + "px, " + miniBoum.y + "px)";
   setTimeout(() => {
     miniBoum.elem.remove();
@@ -290,9 +362,37 @@ function createMonsterBomb(monster){
   monsterBomb.elem.className = "monsterBomb";
   monsterBomb.elem.style.width = monsterBomb.width + "px";
   monsterBomb.elem.style.height = monsterBomb.height + "px";
-  monster.elem.parentNode.insertBefore(monsterBomb.elem, monster.elem);
+  if(monster !== null && monster.elem !== null && monsterBomb !== null && monsterBomb.element !== null){
+    monster.elem.parentNode.insertBefore(monsterBomb.elem, monster.elem);
+  }
   monsterBomb.elem.style.transform = "translate(" + monsterBomb.x + "px, " + monsterBomb.y + "px)";
   monsterBombs.push(monsterBomb);
+}
+
+function getRandomBonusType(){
+  return "tripleFire";
+}
+
+function createBonus(){
+  if(!gameStarted) { return; }
+  let bonus = {
+    elem: document.createElement("div"),
+    x: getRandomInt(1, screen.width),
+    y: getRandomInt(0, 100),
+    width: bonusWidth,
+    height: bonusHeight,
+    speed: bonusSpeed,
+    type: getRandomBonusType()
+  };
+  bonus.elem.className = "bonus";
+  bonus.elem.style.width = bonus.width + "px";
+  bonus.elem.style.height = bonus.height + "px";
+  if(spaceship !== null && spaceship.elem !== null && bonus !== null && bonus.element !== null){
+    spaceship.elem.parentNode.insertBefore(bonus.elem, spaceship.elem);
+  }
+  bonus.elem.style.transform = "translate(" + bonus.x + "px, " + bonus.y + "px)";
+
+  bonuss.push(bonus);
 }
 
 function moveSpaceship() {
@@ -328,6 +428,12 @@ function moveBombMonster() {
   });
 }
 
+function moveBonus(){
+  _.forEach(bonuss, (bonus) => {
+    bonus.y += bonus.speed;
+  });
+}
+
 function deleteOutBullet(){
   _.forEach(bullets, (bullet) => {
     if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
@@ -338,6 +444,7 @@ function deleteOutBullet(){
     }
   });
 }
+
 function deleteOutMonsterBombs(){
   _.forEach(monsterBombs, (monsterBomb) => {
     if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
@@ -349,11 +456,25 @@ function deleteOutMonsterBombs(){
   });
 }
 
+function deleteOutBonus(){
+  _.forEach(bonuss, (bonus) => {
+    if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
+      if(bonus.y > screen.height){
+        bonus.elem.remove();
+        _.remove(bonuss, bonus);
+      }
+    }
+  });
+}
+
 function checkCollisions(){
   _.forEach(monsters, (monster) => {
     _.forEach(bullets, (bullet) => {
       if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined" &&
-          typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
+          bullet !== null && bullet.elem !== null &&
+          typeof monster !== "undefined" && typeof monster.elem !== "undefined" &&
+          monster !== null && monster.elem !== null
+        ){
         if (collisionAABB(bullet, monster)) {
           score.value += 10;
           createBoum(monster);
@@ -368,8 +489,6 @@ function checkCollisions(){
     if(typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
       if (collisionAABB(spaceship, monster)) {
         resetGame();
-        // createBoum(monster);
-        // createBoum(spaceship);
         return false;
       }
     }
@@ -391,10 +510,19 @@ function checkCollisions(){
     _.forEach(monsterBombs, (monsterBomb) => {
       if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
         if (collisionAABB(spaceship, monsterBomb)) {
-          // createBoum(monsterBombs);
-          // createBoum(spaceship);
           resetGame();
           return false;
+        }
+      }
+    });
+    _.forEach(bonuss, (bonus) => {
+      if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
+        if (collisionAABB(spaceship, bonus)) {
+          // resetGame();
+          console.log((bonus.type === "tripleFire"));
+          bonusTripleFire = (bonus.type === "tripleFire");
+          bonus.elem.remove();
+          _.remove(bonuss, bonus);
         }
       }
     });
@@ -497,6 +625,7 @@ function resetGame(){
   hideElement(buttonContinue);
   hideElement(buttonPause);
   gameStarted = false;
+  bonusTripleFire = false;
 
   _.forEach(bullets, (bullet) => {
     if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
@@ -513,6 +642,12 @@ function resetGame(){
   _.forEach(monsterBombs, (monsterBomb) => {
     if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
       monsterBomb.elem.remove();
+    }
+  });
+
+  _.forEach(bonuss, (bonus) => {
+    if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
+      bonus.elem.remove();
     }
   });
 

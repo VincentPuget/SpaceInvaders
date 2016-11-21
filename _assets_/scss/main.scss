@@ -111,6 +111,12 @@ html{
     animation: spriteAnimationMonster .8s steps(2) infinite;
   }
 
+  .bonus{
+    width: 35px;
+    height: 35px;
+    background: red;
+  }
+
   @keyframes spriteAnimationSpaceship {
      from { background-position:    0px; }
        to { background-position: -120px; }
