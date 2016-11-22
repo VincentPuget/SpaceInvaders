@@ -99,22 +99,46 @@ html{
     background: url('/images/monsterBomb.png');
   }
 
-  @keyframes spriteAnimationMonster {
+  @keyframes spriteAnimationMonster_1 {
      from { background-position:    0px; }
        to { background-position: -110px; }
   }
 
-  .monster{
+  .monster_1{
     width: 55px;
     height: 40px;
     background: url("/images/sprite_monster_1.png");
-    animation: spriteAnimationMonster .8s steps(2) infinite;
+    animation: spriteAnimationMonster_1 .8s steps(2) infinite;
+  }
+
+  @keyframes spriteAnimationMonster_2 {
+     from { background-position:    0px; }
+       to { background-position: -80px; }
+  }
+
+  .monster_2{
+    width: 40px;
+    height: 40px;
+    background: url("/images/sprite_monster_2.png");
+    animation: spriteAnimationMonster_2 .8s steps(2) infinite;
+  }
+
+  @keyframes spriteAnimationMonster_3 {
+     from { background-position:    0px; }
+       to { background-position: -120px; }
+  }
+
+  .monster_3{
+    width: 60px;
+    height: 40px;
+    background: url("/images/sprite_monster_3.png");
+    animation: spriteAnimationMonster_3 .8s steps(2) infinite;
   }
 
   .bonus{
-    width: 35px;
-    height: 35px;
-    background: red;
+    width: 30px;
+    height: 40px;
+    background: url("/images/interrogation_mark.png");
   }
 
   @keyframes spriteAnimationSpaceship {
