@@ -36,26 +36,23 @@ let monsterBombWidth = 15,
 
 let bonusWidth = 30,
     bonusHeight = 40,
-    bonusSpeed = 1,
-    bonusTripleFire = false;
+    bonusSpeed = 1;
 
-// let bonusAvailables = [
-//   {
-//     bonusTripleFire: {
-//       active: false
-//     }
-//   },
-//   {
-//     speedSpaceShip: {
-//       active: false
-//     }
-//   },
-//   {
-//     bulletHz: {
-//       active: false
-//     }
-//   }
-// ];
+let bonusAvailables = [
+  {
+    name: "bonusTripleFire",
+    active: false
+  },
+  {
+    name: "speedSpaceShip",
+    active: false
+  },
+  {
+    name: "bulletHz",
+    active: false
+  }
+];
+let bonusActive;
 
 
 let monster1 = {
@@ -191,20 +188,20 @@ function update() {
 
 function getRandomInt(min, max)
 {
-  var random = Math.floor(Math.random() * (max - min + 1)) + min;
+  let random = Math.floor(Math.random() * (max - min + 1)) + min;
   return random;
 }
 
 function chooseMonsterForBombing(){
-  var rand = getRandomInt(1, 1000);
+  let rand = getRandomInt(1, 1000);
   if(rand < 10){
-    var randMonster = getRandomInt(1, monsters.length - 1);
+    let randMonster = getRandomInt(1, monsters.length - 1);
     createMonsterBomb(monsters[randMonster]);
   }
 }
 
 function randomBonus(){
-  var rand = getRandomInt(1, 10000);
+  let rand = getRandomInt(1, 100);
   if(rand < 10 && bonuss.length < 2){
     createBonus();
   }
@@ -287,7 +284,15 @@ function spaceshipFire() {
     }
     bullets.push(bullet);
 
-    if(bonusTripleFire){
+
+    if(typeof bonusActive !== "undefined" && bonusActive.name === "bulletHz"){
+      bulletHz = 10;
+    }
+    else{
+      bulletHz = 75;
+    }
+
+    if(typeof bonusActive !== "undefined" && bonusActive.name === "bonusTripleFire"){
       let bulletLeft = generateBullet("left");
       if(spaceship !== null && spaceship.elem !== null && bulletLeft !== null && bulletLeft.element !== null){
         spaceship.elem.parentNode.insertBefore(bulletLeft.elem, spaceship.elem);
@@ -353,9 +358,9 @@ function createMonsters(){
 
   monsters = [];
   let totalMonster = 0;
-  for(var i = 0; i < linesOfMunster ; i++){
+  for(let i = 0; i < linesOfMunster ; i++){
     monstersByLine = getMonstersByLine(i);
-    for(var j = 0; j < monstersByLine ; j++){
+    for(let j = 0; j < monstersByLine ; j++){
       let monster = generateMonster(i, j);
       if(spaceship !== null && spaceship.elem !== null && monster !== null && monster.element !== null){
         spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
@@ -433,7 +438,20 @@ function createMonsterBomb(monster){
 }
 
 function getRandomBonusType(){
-  return "tripleFire";
+  let randBonus = getRandomInt(0, bonusAvailables.length - 1);
+  bonusAvailables[randBonus].active = true;
+  return bonusAvailables[randBonus];
+}
+
+function getActivatedBonus(){
+  let activatedBonus;
+  _.forEach(bonusAvailables, (oneBonus) => {
+    if(oneBonus.active){
+      activatedBonus = oneBonus;
+      return false;
+    }
+  });
+  return activatedBonus;
 }
 
 function createBonus(){
@@ -459,6 +477,15 @@ function createBonus(){
 }
 
 function moveSpaceship() {
+
+  if(typeof bonusActive !== "undefined" && bonusActive.name === "speedSpaceShip"){
+    spaceship.speed = 12;
+  }
+  else{
+    spaceship.speed = 6;
+  }
+
+
   if (spaceship.moveLeft) {
     spaceship.x -= spaceship.speed;
   }
@@ -578,15 +605,17 @@ function checkCollisions(){
         }
       }
     });
-    _.forEach(bonuss, (bonus) => {
-      if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
-        if (collisionAABB(spaceship, bonus)) {
-          bonusTripleFire = (bonus.type === "tripleFire");
-          bonus.elem.remove();
-          _.remove(bonuss, bonus);
-        }
+  });
+  _.forEach(bonuss, (bonus) => {
+    if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
+      if (collisionAABB(spaceship, bonus)) {
+        rasAllBonus();
+        bonus.type.active = true;
+        bonusActive = bonus.type;
+        bonus.elem.remove();
+        _.remove(bonuss, bonus);
       }
-    });
+    }
   });
 }
 
@@ -614,7 +643,7 @@ function collisionAABB(r1, r2) {
 
 function addEventListeners() {
 
-  var k = [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_b, KEY_a],
+  let k = [KEY_UP, KEY_UP, KEY_DOWN, KEY_DOWN, KEY_LEFT, KEY_RIGHT, KEY_LEFT, KEY_RIGHT, KEY_b, KEY_a],
   n = 0;
 
   window.addEventListener("keydown", (event) => {
@@ -705,6 +734,13 @@ function removeAllBonuss(){
   });
 }
 
+function rasAllBonus(){
+  _.forEach(bonusAvailables, (oneBonus) => {
+    oneBonus.active = false;
+  });
+  bonusActive = undefined;
+}
+
 function resetGame(){
 
   window.cancelAnimationFrame(requestId);
@@ -718,7 +754,7 @@ function resetGame(){
   hideElement(buttonContinue);
   hideElement(buttonPause);
   gameStarted = false;
-  bonusTripleFire = false;
+  rasAllBonus();
 
   removeAllBullets();
   removeAllMonsters();
