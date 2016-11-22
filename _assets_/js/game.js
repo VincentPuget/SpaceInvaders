@@ -31,22 +31,62 @@ let bulletWidth = 2,
 
 let monsterBombWidth = 15,
     monsterBombHeight = 21,
-    monsterBombSpeed = 1;
+    monsterBombSpeed = 1,
+    monsterBombPoint = 5;
 
-let bonusWidth = 35,
-    bonusHeight = 35,
+let bonusWidth = 30,
+    bonusHeight = 40,
     bonusSpeed = 1,
     bonusTripleFire = false;
 
-let monsterWidth = 55,
-    monsterHeight = 40,
-    monsterSpeed = 0.5,
-    numTotalMonster = 40,
-    linesOfMunster = 4,
+// let bonusAvailables = [
+//   {
+//     bonusTripleFire: {
+//       active: false
+//     }
+//   },
+//   {
+//     speedSpaceShip: {
+//       active: false
+//     }
+//   },
+//   {
+//     bulletHz: {
+//       active: false
+//     }
+//   }
+// ];
+
+
+let monster1 = {
+  width: 55,
+  height: 40,
+  className: "monster_1",
+  point: 10,
+  speed: 0.5
+};
+let monster2 = {
+  width: 40,
+  height: 40,
+  className: "monster_2",
+  point: 20,
+  speed: 0.5
+};
+let monster3 = {
+  width: 60,
+  height: 40,
+  className: "monster_3",
+  point: 30,
+  speed: 0.5
+};
+
+let numTotalMonster = 30,
+    linesOfMunster = 3,
     monstersByLine = 10,
     paddingAroundAllMonsters = 30,
     spaceAroundMonsters = 10,
-    monsterBottomLimit = screen.height - 50;
+    monsterBottomLimit = screen.height - 50,
+    monsterPoint = 10;
 
 let boumWidth = 55,
     boumHeight = 40,
@@ -164,7 +204,7 @@ function chooseMonsterForBombing(){
 }
 
 function randomBonus(){
-  var rand = getRandomInt(1, 1000);
+  var rand = getRandomInt(1, 10000);
   if(rand < 10 && bonuss.length < 2){
     createBonus();
   }
@@ -212,23 +252,17 @@ function containSpaceships() {
 function generateBullet(position){
   let positionX;
   let positionY;
-  switch (position) {
-    case "left":
-      positionX = spaceship.x + spaceship.width / 2 - 1 - 14;
-      positionY = spaceship.y - bulletHeight + 20;
-      break;
-    case "center":
-      positionX = spaceship.x + spaceship.width / 2 - 1;
-      positionY = spaceship.y - bulletHeight;
-      break;
-    case "right":
-      positionX = spaceship.x + spaceship.width / 2 - 1 + 14;
-      positionY = spaceship.y - bulletHeight + 20;
-      break;
-    default:
-      positionX = spaceship.x + spaceship.width / 2 - 1;
-      positionY = spaceship.y - bulletHeight;
-      break;
+  if(position === "left"){
+    positionX = spaceship.x + spaceship.width / 2 - 1 - 14;
+    positionY = spaceship.y - bulletHeight + 20;
+  }
+  else if(position === "center"){
+    positionX = spaceship.x + spaceship.width / 2 - 1;
+    positionY = spaceship.y - bulletHeight;
+  }
+  else if(position === "right"){
+    positionX = spaceship.x + spaceship.width / 2 - 1 + 14;
+    positionY = spaceship.y - bulletHeight + 20;
   }
   let bullet = {
     elem: document.createElement("div"),
@@ -272,33 +306,61 @@ function spaceshipFire() {
   }
 }
 
+function generateMonster(i, j){
+  let monster_;
+
+  if(i === 0){
+    monster_ = monster1;
+  }
+  else if(i === 1){
+    monster_ = monster2;
+  }
+  else if(i === 2){
+    monster_ = monster3;
+  }
+
+  let monster = {
+    elem: document.createElement("div"),
+    x: (j * monster_.width) + (j * spaceAroundMonsters) + paddingAroundAllMonsters,
+    y: (i * monster_.height) + (i * spaceAroundMonsters) + paddingAroundAllMonsters * 2,
+    width: monster_.width,
+    height: monster_.height,
+    speed: monster_.speed,
+    point: monster_.point
+  };
+  monster.elem.className = monster_.className;
+  monster.elem.style.width = monster.width + "px";
+  monster.elem.style.height = monster.height + "px";
+  return monster;
+}
+
+function getMonstersByLine(i){
+  let monstersByLine1 = Math.round(screen.width / (monster1.width + spaceAroundMonsters )) - 1;
+  let monstersByLine2 = Math.round(screen.width / (monster2.width + spaceAroundMonsters )) - 1;
+  let monstersByLine3 = Math.round(screen.width / (monster3.width + spaceAroundMonsters )) - 1;
+
+  let monstersByLine12 = Math.min(monstersByLine1, monstersByLine2);
+  monstersByLine = Math.min(monstersByLine12, monstersByLine3);
+
+  return monstersByLine;
+}
+
 function createMonsters(){
 
-  monstersByLine = Math.max(Math.round(screen.width / (monsterWidth + spaceAroundMonsters )), monstersByLine) - 1;
-  numTotalMonster = linesOfMunster * monstersByLine;
+  // monstersByLine = Math.max(Math.round(screen.width / (monster_1_width + spaceAroundMonsters )), monstersByLine) - 1;
+  // monstersByLine = 10;
+  // numTotalMonster = linesOfMunster * monstersByLine;
 
   monsters = [];
   let totalMonster = 0;
   for(var i = 0; i < linesOfMunster ; i++){
+    monstersByLine = getMonstersByLine(i);
     for(var j = 0; j < monstersByLine ; j++){
-      if(totalMonster < numTotalMonster){
-        let monster = {
-          elem: document.createElement("div"),
-          x: (j * monsterWidth) + (j * spaceAroundMonsters) + paddingAroundAllMonsters,
-          y: (i * monsterHeight) + (i * spaceAroundMonsters) + paddingAroundAllMonsters * 2,
-          width: monsterWidth,
-          height: monsterHeight,
-          speed: monsterSpeed
-        };
-        monster.elem.className = "monster";
-        monster.elem.style.width = monster.width + "px";
-        monster.elem.style.height = monster.height + "px";
-        if(spaceship !== null && spaceship.elem !== null && monster !== null && monster.element !== null){
-          spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
-        }
-        monsters.push(monster);
-        totalMonster += 1;
+      let monster = generateMonster(i, j);
+      if(spaceship !== null && spaceship.elem !== null && monster !== null && monster.element !== null){
+        spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
       }
+      monsters.push(monster);
     }
   }
 }
@@ -357,7 +419,8 @@ function createMonsterBomb(monster){
     y: monster.y,
     width: monsterBombWidth,
     height: monsterBombHeight,
-    speed: monsterBombSpeed
+    speed: monsterBombSpeed,
+    point: monsterBombPoint
   };
   monsterBomb.elem.className = "monsterBomb";
   monsterBomb.elem.style.width = monsterBomb.width + "px";
@@ -377,7 +440,7 @@ function createBonus(){
   if(!gameStarted) { return; }
   let bonus = {
     elem: document.createElement("div"),
-    x: getRandomInt(1, screen.width),
+    x: getRandomInt(1, (screen.width - bonusWidth)),
     y: getRandomInt(0, 100),
     width: bonusWidth,
     height: bonusHeight,
@@ -476,7 +539,7 @@ function checkCollisions(){
           monster !== null && monster.elem !== null
         ){
         if (collisionAABB(bullet, monster)) {
-          score.value += 10;
+          score.value += monster.point;
           createBoum(monster);
           bullet.elem.remove();
           monster.elem.remove();
@@ -498,7 +561,7 @@ function checkCollisions(){
       if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined" &&
         typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
         if (collisionAABB(bullet, monsterBomb)) {
-          score.value += 5;
+          score.value += monsterBomb.point;
           createMiniBoum(monsterBomb);
           bullet.elem.remove();
           monsterBomb.elem.remove();
@@ -518,8 +581,6 @@ function checkCollisions(){
     _.forEach(bonuss, (bonus) => {
       if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
         if (collisionAABB(spaceship, bonus)) {
-          // resetGame();
-          console.log((bonus.type === "tripleFire"));
           bonusTripleFire = (bonus.type === "tripleFire");
           bonus.elem.remove();
           _.remove(bonuss, bonus);
@@ -612,6 +673,38 @@ function addEventListeners() {
   });
 }
 
+function removeAllBullets(){
+  _.forEach(bullets, (bullet) => {
+    if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
+      bullet.elem.remove();
+    }
+  });
+}
+
+function removeAllMonsters(){
+  _.forEach(monsters, (monster) => {
+    if(typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
+      monster.elem.remove();
+    }
+  });
+}
+
+function removeAllMonsterBombs(){
+  _.forEach(monsterBombs, (monsterBomb) => {
+    if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
+      monsterBomb.elem.remove();
+    }
+  });
+}
+
+function removeAllBonuss(){
+  _.forEach(bonuss, (bonus) => {
+    if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
+      bonus.elem.remove();
+    }
+  });
+}
+
 function resetGame(){
 
   window.cancelAnimationFrame(requestId);
@@ -627,29 +720,10 @@ function resetGame(){
   gameStarted = false;
   bonusTripleFire = false;
 
-  _.forEach(bullets, (bullet) => {
-    if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
-      bullet.elem.remove();
-    }
-  });
-
-  _.forEach(monsters, (monster) => {
-    if(typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
-      monster.elem.remove();
-    }
-  });
-
-  _.forEach(monsterBombs, (monsterBomb) => {
-    if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
-      monsterBomb.elem.remove();
-    }
-  });
-
-  _.forEach(bonuss, (bonus) => {
-    if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
-      bonus.elem.remove();
-    }
-  });
+  removeAllBullets();
+  removeAllMonsters();
+  removeAllMonsterBombs();
+  removeAllBonuss();
 
   spaceship.x = (screen.width - spaceshipWidth) / 2;
   spaceship.y = screen.height - spaceshipHeight - 4;
@@ -658,6 +732,7 @@ function resetGame(){
 
 function checkWinState(){
   if(_.isArray(monsters) && monsters.length === 0 && _.isArray(monsterBombs) && monsterBombs.length === 0){
+    removeAllBonuss();
     showElement(menu);
     showElement(win);
     hideElement(loose);
