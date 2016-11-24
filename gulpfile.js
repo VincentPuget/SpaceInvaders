@@ -159,6 +159,8 @@ gulp.task("js", () => {
   return gulp.src(paths.js.src)
     .pipe(gulpif(!prod, sourcemaps.init()))
     .pipe(order([
+      "Screen.js",
+      "class/**/*js",
       "*"
     ]))
     .pipe(gulpif(prod, babel()))

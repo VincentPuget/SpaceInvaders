@@ -27,7 +27,14 @@
   },
   "globals": {
     "app": true,
-    "_": false
+    "_": false,
+    "Screen": true,
+    "Spaceship": true,
+    "MonsterBomb": true,
+    "Bullet": true,
+    "Boum": true,
+    "MiniBoum": true,
+    "Monster": true
   },
   "extends": "eslint:recommended"
 }

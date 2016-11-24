@@ -1,5 +1,6 @@
 "use strict";
 
+//TODO set default value of bonus in config
 
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
@@ -10,29 +11,11 @@ const KEY_SPACE = 32;
 const KEY_a = 65;
 const KEY_b = 66;
 
-let screen = {
-  elem: document.querySelector(".screen")
-};
-screen.width = screen.elem.getBoundingClientRect().width;
-screen.height = screen.elem.getBoundingClientRect().height;
+let screen = new Screen();
 
 let requestId;
 let pause = true;
 let gameStarted = false;
-
-let spaceshipWidth = 30,
-    spaceshipHeight = 38,
-    spaceshipSpeed = 6;
-
-let bulletWidth = 2,
-    bulletHeight = 8,
-    bulletSpeed = 1,
-    bulletHz = 75;
-
-let monsterBombWidth = 15,
-    monsterBombHeight = 21,
-    monsterBombSpeed = 1,
-    monsterBombPoint = 5;
 
 let bonusWidth = 30,
     bonusHeight = 40,
@@ -55,40 +38,35 @@ let bonusAvailables = [
 let bonusActive;
 
 
-let monster1 = {
-  width: 55,
-  height: 40,
-  className: "monster_1",
-  point: 10,
-  speed: 0.5
-};
-let monster2 = {
-  width: 40,
-  height: 40,
-  className: "monster_2",
-  point: 20,
-  speed: 0.5
-};
-let monster3 = {
-  width: 60,
-  height: 40,
-  className: "monster_3",
-  point: 30,
-  speed: 0.5
-};
-
-let numTotalMonster = 30,
-    linesOfMunster = 3,
-    monstersByLine = 10,
-    paddingAroundAllMonsters = 30,
-    spaceAroundMonsters = 10,
-    monsterBottomLimit = screen.height - 50,
-    monsterPoint = 10;
-
-let boumWidth = 55,
-    boumHeight = 40,
-    miniBoumWidth = 35,
-    miniBoumHeight = 25;
+// let monster1 = {
+//   width: 55,
+//   height: 40,
+//   className: "monster_1",
+//   point: 10,
+//   speed: 0.5
+// };
+// let monster2 = {
+//   width: 40,
+//   height: 40,
+//   className: "monster_2",
+//   point: 20,
+//   speed: 0.5
+// };
+// let monster3 = {
+//   width: 60,
+//   height: 40,
+//   className: "monster_3",
+//   point: 30,
+//   speed: 0.5
+// };
+//
+// let numTotalMonster = 30,
+//     linesOfMunster = 3,
+//     monstersByLine = 10,
+//     paddingAroundAllMonsters = 30,
+//     spaceAroundMonsters = 10,
+// let monsterBottomLimit = screen.height - 50;
+// let monsterPoint = 10;
 
 
 let bulletTimeout = null;
@@ -97,19 +75,8 @@ let monsters = [];
 let monsterBombs = [];
 let bonuss = [];
 
-let spaceship = {
-  elem: document.querySelector(".spaceship"),
-  x: (screen.width - spaceshipWidth) / 2,
-  y: screen.height - spaceshipHeight - 4,
-  width: spaceshipWidth,
-  height: spaceshipHeight,
-  speed: spaceshipSpeed,
-  moveLeft: false,
-  moveRight: false,
-  moveUp: false,
-  moveDown: false,
-  fire: false
-};
+
+let spaceship = new Spaceship();
 
 let buttonPause = {
   elem: document.querySelector(".buttonPause")
@@ -245,109 +212,36 @@ function containSpaceships() {
   spaceship.y = Math.min(screen.height - spaceship.height, spaceship.y);// débordement en bas
 }
 
-
-function generateBullet(position){
-  let positionX;
-  let positionY;
-  if(position === "left"){
-    positionX = spaceship.x + spaceship.width / 2 - 1 - 14;
-    positionY = spaceship.y - bulletHeight + 20;
-  }
-  else if(position === "center"){
-    positionX = spaceship.x + spaceship.width / 2 - 1;
-    positionY = spaceship.y - bulletHeight;
-  }
-  else if(position === "right"){
-    positionX = spaceship.x + spaceship.width / 2 - 1 + 14;
-    positionY = spaceship.y - bulletHeight + 20;
-  }
-  let bullet = {
-    elem: document.createElement("div"),
-    x: positionX,
-    y: positionY,
-    width: bulletWidth,
-    height: bulletHeight,
-    speed: bulletHeight
-  };
-  bullet.elem.className = "bullet";
-  bullet.elem.style.width = bullet.width + "px";
-  bullet.elem.style.height = bullet.height + "px";
-  bullet.elem.style.background = "white";
-  return bullet;
-}
-
 function spaceshipFire() {
   if(spaceship.fire && bulletTimeout === null){
-    let bullet = generateBullet("center");
-    if(spaceship !== null && spaceship.elem !== null && bullet !== null && bullet.element !== null){
-      spaceship.elem.parentNode.insertBefore(bullet.elem, spaceship.elem);
-    }
+
+    let bullet = new Bullet("center");
     bullets.push(bullet);
 
-
     if(typeof bonusActive !== "undefined" && bonusActive.name === "bulletHz"){
-      bulletHz = 10;
+      Bullet.setHz(10);
     }
     else{
-      bulletHz = 75;
+      Bullet.setHz(75);
     }
 
     if(typeof bonusActive !== "undefined" && bonusActive.name === "bonusTripleFire"){
-      let bulletLeft = generateBullet("left");
-      if(spaceship !== null && spaceship.elem !== null && bulletLeft !== null && bulletLeft.element !== null){
-        spaceship.elem.parentNode.insertBefore(bulletLeft.elem, spaceship.elem);
-      }
+      let bulletLeft = new Bullet("left");
       bullets.push(bulletLeft);
-      let bulletRight = generateBullet("right");
-      if(spaceship !== null && spaceship.elem !== null && bulletRight !== null && bulletRight.element !== null){
-        spaceship.elem.parentNode.insertBefore(bulletRight.elem, spaceship.elem);
-      }
+
+      let bulletRight = new Bullet("right");
       bullets.push(bulletRight);
     }
     bulletTimeout = setTimeout(() => {
       clearTimeout(bulletTimeout);
       bulletTimeout = null;
-    }, bulletHz);
+    }, Bullet.getHz());
   }
 }
 
 function generateMonster(i, j){
-  let monster_;
-
-  if(i === 0){
-    monster_ = monster1;
-  }
-  else if(i === 1){
-    monster_ = monster2;
-  }
-  else if(i === 2){
-    monster_ = monster3;
-  }
-
-  let monster = {
-    elem: document.createElement("div"),
-    x: (j * monster_.width) + (j * spaceAroundMonsters) + paddingAroundAllMonsters,
-    y: (i * monster_.height) + (i * spaceAroundMonsters) + paddingAroundAllMonsters * 2,
-    width: monster_.width,
-    height: monster_.height,
-    speed: monster_.speed,
-    point: monster_.point
-  };
-  monster.elem.className = monster_.className;
-  monster.elem.style.width = monster.width + "px";
-  monster.elem.style.height = monster.height + "px";
+  let monster = new Monster(i, j);
   return monster;
-}
-
-function getMonstersByLine(i){
-  let monstersByLine1 = Math.round(screen.width / (monster1.width + spaceAroundMonsters )) - 1;
-  let monstersByLine2 = Math.round(screen.width / (monster2.width + spaceAroundMonsters )) - 1;
-  let monstersByLine3 = Math.round(screen.width / (monster3.width + spaceAroundMonsters )) - 1;
-
-  let monstersByLine12 = Math.min(monstersByLine1, monstersByLine2);
-  monstersByLine = Math.min(monstersByLine12, monstersByLine3);
-
-  return monstersByLine;
 }
 
 function createMonsters(){
@@ -358,82 +252,20 @@ function createMonsters(){
 
   monsters = [];
   let totalMonster = 0;
-  for(let i = 0; i < linesOfMunster ; i++){
-    monstersByLine = getMonstersByLine(i);
-    for(let j = 0; j < monstersByLine ; j++){
+  for(let i = 0; i < Monster.getLineOfMonster() ; i++){
+    for(let j = 0; j < Monster.getMonstersByLine(i) ; j++){
       let monster = generateMonster(i, j);
-      if(spaceship !== null && spaceship.elem !== null && monster !== null && monster.element !== null){
-        spaceship.elem.parentNode.insertBefore(monster.elem, spaceship.elem);
-      }
+
       monsters.push(monster);
     }
   }
-}
-
-function createBoum(element){
-  let deltaW = (boumWidth > element.width) ? (boumWidth - element.width) / 2 : (element.width - boumWidth) / 2;
-  let deltaH = (boumHeight > element.height) ? (boumHeight - element.height) / 2 : (element.height - boumHeight) / 2;
-  let boum = {
-    elem: document.createElement("div"),
-    x: element.x - deltaW,
-    y: element.y - deltaH,
-    width: boumWidth,
-    height: boumHeight
-  };
-  boum.elem.className = "boum";
-  boum.elem.style.width = boum.width + "px";
-  boum.elem.style.height = boum.height + "px";
-  if(element !== null && element.elem !== null && boum !== null && boum.element !== null){
-    element.elem.parentNode.insertBefore(boum.elem, element.elem);
-  }
-  boum.elem.style.transform = "translate(" + boum.x + "px, " + boum.y + "px)";
-  setTimeout(() => {
-    boum.elem.remove();
-  }, 200);
-}
-
-function createMiniBoum(element){
-  let deltaW = (miniBoumWidth > element.width) ? (miniBoumWidth - element.width) / 2 : (element.width - miniBoumWidth) / 2;
-  let deltaH = (miniBoumHeight > element.height) ? (miniBoumHeight - element.height) / 2 : (element.height - miniBoumHeight) / 2;
-  let miniBoum = {
-    elem: document.createElement("div"),
-    x: element.x - deltaW,
-    y: element.y - deltaH,
-    width: miniBoumWidth,
-    height: miniBoumHeight
-  };
-  miniBoum.elem.className = "miniBoum";
-  miniBoum.elem.style.width = miniBoum.width + "px";
-  miniBoum.elem.style.height = miniBoum.height + "px";
-  if(element !== null && element.elem !== null && miniBoum !== null && miniBoum.element !== null){
-    element.elem.parentNode.insertBefore(miniBoum.elem, element.elem);
-  }
-  miniBoum.elem.style.transform = "translate(" + miniBoum.x + "px, " + miniBoum.y + "px)";
-  setTimeout(() => {
-    miniBoum.elem.remove();
-  }, 200);
 }
 
 function createMonsterBomb(monster){
   if(typeof monster === "undefined"){
     return;
   }
-  let monsterBomb = {
-    elem: document.createElement("div"),
-    x: monster.x,
-    y: monster.y,
-    width: monsterBombWidth,
-    height: monsterBombHeight,
-    speed: monsterBombSpeed,
-    point: monsterBombPoint
-  };
-  monsterBomb.elem.className = "monsterBomb";
-  monsterBomb.elem.style.width = monsterBomb.width + "px";
-  monsterBomb.elem.style.height = monsterBomb.height + "px";
-  if(monster !== null && monster.elem !== null && monsterBomb !== null && monsterBomb.element !== null){
-    monster.elem.parentNode.insertBefore(monsterBomb.elem, monster.elem);
-  }
-  monsterBomb.elem.style.transform = "translate(" + monsterBomb.x + "px, " + monsterBomb.y + "px)";
+  let monsterBomb = new MonsterBomb(monster);
   monsterBombs.push(monsterBomb);
 }
 
@@ -567,7 +399,7 @@ function checkCollisions(){
         ){
         if (collisionAABB(bullet, monster)) {
           score.value += monster.point;
-          createBoum(monster);
+          Boum.create(monster);
           bullet.elem.remove();
           monster.elem.remove();
           _.remove(bullets, bullet);
@@ -589,7 +421,7 @@ function checkCollisions(){
         typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
         if (collisionAABB(bullet, monsterBomb)) {
           score.value += monsterBomb.point;
-          createMiniBoum(monsterBomb);
+          MiniBoum.create(monsterBomb);
           bullet.elem.remove();
           monsterBomb.elem.remove();
           _.remove(bullets, bullet);
@@ -622,7 +454,7 @@ function checkCollisions(){
 function checkMonsterPosition(){
   _.forEach(monsters, (monster) => {
     if(typeof monster !== "undefined"){
-      if(monster.y > monsterBottomLimit){
+      if(monster.y > Monster.getMonsterBottomLimit()){
         resetGame();
         return false;
       }
@@ -665,7 +497,7 @@ function addEventListeners() {
 
     if (event.keyCode === k[n]) {
       if (n === k.length - 1) {
-        bulletHz = 10;
+        Bullet.setHz(10);
         console.log("YEAH");
         n = 0;
         return false;
@@ -761,8 +593,8 @@ function resetGame(){
   removeAllMonsterBombs();
   removeAllBonuss();
 
-  spaceship.x = (screen.width - spaceshipWidth) / 2;
-  spaceship.y = screen.height - spaceshipHeight - 4;
+  spaceship.x = (screen.width - spaceship.width) / 2;
+  spaceship.y = screen.height - spaceship.height - 4;
 
 }
 
