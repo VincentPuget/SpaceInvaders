@@ -6,25 +6,24 @@ const MONSTER_BOMB_HEIGHT = 21;
 let monsterBombSpeed = 1;
 let monsterBombPoint = 5;
 
-class MonsterBomb {
+class MonsterBomb extends DomElem{
   constructor(monster){
+    super();
     if(typeof monster === "undefined") { return; }
-    let monsterBomb = {
-      elem: document.createElement("div"),
-      x: monster.x,
-      y: monster.y,
-      width: MONSTER_BOMB_WIDTH,
-      height: MONSTER_BOMB_HEIGHT,
-      speed: monsterBombSpeed,
-      point: monsterBombPoint
-    };
-    monsterBomb.elem.className = "monsterBomb";
-    monsterBomb.elem.style.width = monsterBomb.width + "px";
-    monsterBomb.elem.style.height = monsterBomb.height + "px";
-    if(monster !== null && monster.elem !== null && monsterBomb !== null && monsterBomb.element !== null){
-      monster.elem.parentNode.insertBefore(monsterBomb.elem, monster.elem);
+    this.elem = document.createElement("div");
+    this.x = monster.x;
+    this.y = monster.y;
+    this.width = MONSTER_BOMB_WIDTH;
+    this.height = MONSTER_BOMB_HEIGHT;
+    this.speed = monsterBombSpeed;
+    this.point = monsterBombPoint;
+    this.elem.className = "monsterBomb";
+    this.elem.style.width = this.width + "px";
+    this.elem.style.height = this.height + "px";
+    if(monster !== null && monster.elem !== null && this.element !== null){
+      monster.elem.parentNode.insertBefore(this.elem, monster.elem);
     }
-    monsterBomb.elem.style.transform = "translate(" + monsterBomb.x + "px, " + monsterBomb.y + "px)";
-    return monsterBomb;
+    this.elem.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    return this;
   }
 }

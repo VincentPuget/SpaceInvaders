@@ -2,15 +2,14 @@
 
 let screen_;
 
-class Screen {
+class Screen extends DomElem{
   constructor(){
-    let screen = {
-      elem: document.querySelector(".screen")
-    };
-    screen.width = screen.elem.getBoundingClientRect().width;
-    screen.height = screen.elem.getBoundingClientRect().height;
-    screen_ = screen;
-    return screen;
+    super();
+    this.elem = document.querySelector(".screen");
+    this.width = this.elem.getBoundingClientRect().width;
+    this.height = this.elem.getBoundingClientRect().height;
+    screen_ = this;
+    return this;
   }
 
   static get(){

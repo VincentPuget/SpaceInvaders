@@ -159,9 +159,9 @@ gulp.task("js", () => {
   return gulp.src(paths.js.src)
     .pipe(gulpif(!prod, sourcemaps.init()))
     .pipe(order([
-      "Screen.js",
-      "class/**/*js",
-      "*"
+      "class/DomElem.js",
+      "class/Screen.js",
+      "**/*.js"
     ]))
     .pipe(gulpif(prod, babel()))
     .on("error", onError())

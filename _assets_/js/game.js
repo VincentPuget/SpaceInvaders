@@ -1,6 +1,8 @@
 "use strict";
 
 //TODO set default value of bonus in config
+//TODO create class Bonus
+//TODO Display active bonus UI
 
 const KEY_LEFT = 37;
 const KEY_RIGHT = 39;
@@ -16,58 +18,6 @@ let screen = new Screen();
 let requestId;
 let pause = true;
 let gameStarted = false;
-
-let bonusWidth = 30,
-    bonusHeight = 40,
-    bonusSpeed = 1;
-
-let bonusAvailables = [
-  {
-    name: "bonusTripleFire",
-    active: false
-  },
-  {
-    name: "speedSpaceShip",
-    active: false
-  },
-  {
-    name: "bulletHz",
-    active: false
-  }
-];
-let bonusActive;
-
-
-// let monster1 = {
-//   width: 55,
-//   height: 40,
-//   className: "monster_1",
-//   point: 10,
-//   speed: 0.5
-// };
-// let monster2 = {
-//   width: 40,
-//   height: 40,
-//   className: "monster_2",
-//   point: 20,
-//   speed: 0.5
-// };
-// let monster3 = {
-//   width: 60,
-//   height: 40,
-//   className: "monster_3",
-//   point: 30,
-//   speed: 0.5
-// };
-//
-// let numTotalMonster = 30,
-//     linesOfMunster = 3,
-//     monstersByLine = 10,
-//     paddingAroundAllMonsters = 30,
-//     spaceAroundMonsters = 10,
-// let monsterBottomLimit = screen.height - 50;
-// let monsterPoint = 10;
-
 
 let bulletTimeout = null;
 let bullets = [];
@@ -113,8 +63,6 @@ let loose = {
   elem: document.querySelector(".loose")
 };
 
-
-
 function init() {
   bullets = [];
   monsterBombs = [];
@@ -153,22 +101,16 @@ function update() {
   checkWinState();
 }
 
-function getRandomInt(min, max)
-{
-  let random = Math.floor(Math.random() * (max - min + 1)) + min;
-  return random;
-}
-
 function chooseMonsterForBombing(){
-  let rand = getRandomInt(1, 1000);
+  let rand = Utils.getRandomInt(1, 1000);
   if(rand < 10){
-    let randMonster = getRandomInt(1, monsters.length - 1);
+    let randMonster = Utils.getRandomInt(1, monsters.length - 1);
     createMonsterBomb(monsters[randMonster]);
   }
 }
 
 function randomBonus(){
-  let rand = getRandomInt(1, 100);
+  let rand = Utils.getRandomInt(1, 100);
   if(rand < 10 && bonuss.length < 2){
     createBonus();
   }
@@ -218,14 +160,16 @@ function spaceshipFire() {
     let bullet = new Bullet("center");
     bullets.push(bullet);
 
-    if(typeof bonusActive !== "undefined" && bonusActive.name === "bulletHz"){
+    let activeBonus = Bonus.getActiveBonus();
+
+    if(typeof activeBonus !== "undefined" && activeBonus.type.name === "bulletHz"){
       Bullet.setHz(10);
     }
     else{
       Bullet.setHz(75);
     }
 
-    if(typeof bonusActive !== "undefined" && bonusActive.name === "bonusTripleFire"){
+    if(typeof activeBonus !== "undefined" && activeBonus.type.name === "bonusTripleFire"){
       let bulletLeft = new Bullet("left");
       bullets.push(bulletLeft);
 
@@ -239,23 +183,12 @@ function spaceshipFire() {
   }
 }
 
-function generateMonster(i, j){
-  let monster = new Monster(i, j);
-  return monster;
-}
-
 function createMonsters(){
-
-  // monstersByLine = Math.max(Math.round(screen.width / (monster_1_width + spaceAroundMonsters )), monstersByLine) - 1;
-  // monstersByLine = 10;
-  // numTotalMonster = linesOfMunster * monstersByLine;
-
   monsters = [];
   let totalMonster = 0;
   for(let i = 0; i < Monster.getLineOfMonster() ; i++){
     for(let j = 0; j < Monster.getMonstersByLine(i) ; j++){
-      let monster = generateMonster(i, j);
-
+      let monster = new Monster(i, j);
       monsters.push(monster);
     }
   }
@@ -269,90 +202,37 @@ function createMonsterBomb(monster){
   monsterBombs.push(monsterBomb);
 }
 
-function getRandomBonusType(){
-  let randBonus = getRandomInt(0, bonusAvailables.length - 1);
-  bonusAvailables[randBonus].active = true;
-  return bonusAvailables[randBonus];
-}
-
-function getActivatedBonus(){
-  let activatedBonus;
-  _.forEach(bonusAvailables, (oneBonus) => {
-    if(oneBonus.active){
-      activatedBonus = oneBonus;
-      return false;
-    }
-  });
-  return activatedBonus;
-}
-
 function createBonus(){
   if(!gameStarted) { return; }
-  let bonus = {
-    elem: document.createElement("div"),
-    x: getRandomInt(1, (screen.width - bonusWidth)),
-    y: getRandomInt(0, 100),
-    width: bonusWidth,
-    height: bonusHeight,
-    speed: bonusSpeed,
-    type: getRandomBonusType()
-  };
-  bonus.elem.className = "bonus";
-  bonus.elem.style.width = bonus.width + "px";
-  bonus.elem.style.height = bonus.height + "px";
-  if(spaceship !== null && spaceship.elem !== null && bonus !== null && bonus.element !== null){
-    spaceship.elem.parentNode.insertBefore(bonus.elem, spaceship.elem);
-  }
-  bonus.elem.style.transform = "translate(" + bonus.x + "px, " + bonus.y + "px)";
-
+  let bonus = new Bonus();
   bonuss.push(bonus);
 }
 
 function moveSpaceship() {
-
-  if(typeof bonusActive !== "undefined" && bonusActive.name === "speedSpaceShip"){
-    spaceship.speed = 12;
-  }
-  else{
-    spaceship.speed = 6;
-  }
-
-
-  if (spaceship.moveLeft) {
-    spaceship.x -= spaceship.speed;
-  }
-  else if (spaceship.moveRight) {
-    spaceship.x += spaceship.speed;
-  }
-  if (spaceship.moveUp) {
-    spaceship.y -= spaceship.speed;
-  }
-  else if (spaceship.moveDown) {
-    spaceship.y += spaceship.speed;
-  }
+  spaceship.move();
 }
 
 function moveBullets() {
   _.forEach(bullets, (bullet) => {
-    bullet.y -= bullet.speed;
+    bullet.move();
   });
 }
 
 function moveMonsters() {
   _.forEach(monsters, (monster) => {
-    monster.y += monster.speed;
+    monster.move();
   });
 }
 
 function moveBombMonster() {
   _.forEach(monsterBombs, (monsterBomb) => {
-    monsterBomb.y += monsterBomb.speed;
+    monsterBomb.move();
   });
 }
 
 function moveBonus(){
   _.forEach(bonuss, (bonus) => {
-    bonus.y += bonus.speed;
+    bonus.move();
   });
 }
 
@@ -360,7 +240,7 @@ function deleteOutBullet(){
   _.forEach(bullets, (bullet) => {
     if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
       if(bullet.y < 0){
-        bullet.elem.remove();
+        bullet.remove();
         _.remove(bullets, bullet);
       }
     }
@@ -371,7 +251,7 @@ function deleteOutMonsterBombs(){
   _.forEach(monsterBombs, (monsterBomb) => {
     if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
       if(monsterBomb.y > screen.height){
-        monsterBomb.elem.remove();
+        monsterBomb.remove();
         _.remove(monsterBombs, monsterBomb);
       }
     }
@@ -382,7 +262,7 @@ function deleteOutBonus(){
   _.forEach(bonuss, (bonus) => {
     if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
       if(bonus.y > screen.height){
-        bonus.elem.remove();
+        bonus.remove();
         _.remove(bonuss, bonus);
       }
     }
@@ -399,9 +279,9 @@ function checkCollisions(){
         ){
         if (collisionAABB(bullet, monster)) {
           score.value += monster.point;
-          Boum.create(monster);
-          bullet.elem.remove();
-          monster.elem.remove();
+          new Boum(monster);
+          bullet.remove();
+          monster.remove();
           _.remove(bullets, bullet);
           _.remove(monsters, monster);
         }
@@ -421,9 +301,9 @@ function checkCollisions(){
         typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
         if (collisionAABB(bullet, monsterBomb)) {
           score.value += monsterBomb.point;
-          MiniBoum.create(monsterBomb);
-          bullet.elem.remove();
-          monsterBomb.elem.remove();
+          new MiniBoum(monsterBomb);
+          bullet.remove();
+          monsterBomb.remove();
           _.remove(bullets, bullet);
           _.remove(monsterBombs, monsterBomb);
         }
@@ -441,10 +321,9 @@ function checkCollisions(){
   _.forEach(bonuss, (bonus) => {
     if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
       if (collisionAABB(spaceship, bonus)) {
-        rasAllBonus();
-        bonus.type.active = true;
-        bonusActive = bonus.type;
-        bonus.elem.remove();
+        Bonus.rasAllBonus();
+        Bonus.setActiveBonus(bonus);
+        bonus.remove();
         _.remove(bonuss, bonus);
       }
     }
@@ -498,7 +377,6 @@ function addEventListeners() {
     if (event.keyCode === k[n]) {
       if (n === k.length - 1) {
         Bullet.setHz(10);
-        console.log("YEAH");
         n = 0;
         return false;
       }
@@ -537,7 +415,7 @@ function addEventListeners() {
 function removeAllBullets(){
   _.forEach(bullets, (bullet) => {
     if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined"){
-      bullet.elem.remove();
+      bullet.remove();
     }
   });
 }
@@ -545,7 +423,7 @@ function removeAllBullets(){
 function removeAllMonsters(){
   _.forEach(monsters, (monster) => {
     if(typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
-      monster.elem.remove();
+      monster.remove();
     }
   });
 }
@@ -553,7 +431,7 @@ function removeAllMonsters(){
 function removeAllMonsterBombs(){
   _.forEach(monsterBombs, (monsterBomb) => {
     if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
-      monsterBomb.elem.remove();
+      monsterBomb.remove();
     }
   });
 }
@@ -561,16 +439,9 @@ function removeAllMonsterBombs(){
 function removeAllBonuss(){
   _.forEach(bonuss, (bonus) => {
     if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
-      bonus.elem.remove();
+      bonus.remove();
     }
   });
-}
-
-function rasAllBonus(){
-  _.forEach(bonusAvailables, (oneBonus) => {
-    oneBonus.active = false;
-  });
-  bonusActive = undefined;
 }
 
 function resetGame(){
@@ -586,7 +457,7 @@ function resetGame(){
   hideElement(buttonContinue);
   hideElement(buttonPause);
   gameStarted = false;
-  rasAllBonus();
+  Bonus.rasAllBonus();
 
   removeAllBullets();
   removeAllMonsters();
@@ -630,7 +501,6 @@ function startGame(){
   showElement(buttonContinue);
   showElement(buttonReStart);
   hideElement(buttonStart);
-  // loop();
   init();
 }
 

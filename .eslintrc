@@ -34,7 +34,10 @@
     "Bullet": true,
     "Boum": true,
     "MiniBoum": true,
-    "Monster": true
+    "Monster": true,
+    "Utils": true,
+    "Bonus": true,
+    "DomElem": true
   },
   "extends": "eslint:recommended"
 }
