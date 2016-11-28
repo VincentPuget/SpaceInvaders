@@ -30,7 +30,7 @@ class Spaceship extends DomElem{
   move() {
     let activeBonus = Bonus.getActiveBonus();
     if(typeof activeBonus !== "undefined" && activeBonus.type.name === "speedSpaceShip"){
-      this.speed = 12;
+      this.speed = 9;
     }
     else{
       this.speed = 6;

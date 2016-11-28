@@ -21,7 +21,7 @@ class Boum extends DomElem{
 
     this.elem.style.width = this.width + "px";
     this.elem.style.height = this.height + "px";
-    if(element !== null && element.elem !== null && this.element !== null){
+    if(element !== null && element.elem !== null && element.elem.parentNode !== null && this.element !== null){
       element.elem.parentNode.insertBefore(this.elem, element.elem);
     }
     this.elem.style.transform = "translate(" + this.x + "px, " + this.y + "px)";

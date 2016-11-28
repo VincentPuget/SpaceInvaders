@@ -32,30 +32,6 @@ html{
   display: none;
 }
 
-.buttons{
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-}
-
-.button{
-  cursor: pointer;
-  color: white;
-  margin: 10px;
-  flex-grow: 1;
-  padding: 10px;
-  font-family: "CosmicAlien";
-  background: #4b6287;
-  border-radius: 5px;
-  border: solid 2px white;
-  text-align: center;
-  transition: all 0.2s;
-}
-.button:hover{
-  background: #202a3a;
-}
-
 .screen {
   width: 90%;
   height: 90%;
@@ -165,12 +141,67 @@ html{
       // right: 24px;
     }
 
+    .health{
+      width: 125px;
+      height: 30px;
+      padding: 5px;
+      left:0;
+      right: 0;
+      margin: auto;
+      .heart{
+        width: 35px;
+        height: 30px;
+        background: url("/images/spriteHeart.png");
+        background-position: -70px;
+      }
+      .heart.lost{
+        width: 35px;
+        height: 30px;
+        background: url("/images/spriteHeart.png");
+        background-position: -35px;
+      }
+    }
+
     .score{
       right: 0;
       top: 0px;
       color: white;
       padding: 10px;
       font: bold 2em/1 "Roboto Mono", monospace;
+    }
+
+    .keyInfo{
+      font-family: "CosmicAlien";
+      color: #FFFFFF;
+      font-size: 1.2em;
+      text-align: center;
+      padding:  00px 10px 10px 10px;
+      div{
+        padding:  00px 00px 10px 00px;
+      }
+    }
+    .buttons{
+      width: 60%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .button{
+      cursor: pointer;
+      color: white;
+      margin: 10px;
+      flex-grow: 1;
+      padding: 10px;
+      font-family: "CosmicAlien";
+      background: #4b6287;
+      border-radius: 5px;
+      border: solid 2px white;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .button:hover{
+      background: #202a3a;
     }
 
     .menu *,
@@ -202,7 +233,7 @@ html{
       .logo{
         display: block;
         text-align: center;
-        padding: 10px 20px 40px 20px;
+        padding: 10px 20px 30px 20px;
       }
       .win,
       .loose{

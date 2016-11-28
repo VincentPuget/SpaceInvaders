@@ -38,7 +38,7 @@ class Bullet extends DomElem{
     this.elem.style.height = this.height + "px";
     this.elem.style.background = "white";
 
-    if(spaceship !== null && spaceship.elem !== null && this.elem !== null){
+    if(spaceship !== null && spaceship.elem !== null && spaceship.elem.parentNode !== null && this.elem !== null){
       spaceship.elem.parentNode.insertBefore(this.elem, spaceship.elem);
     }
 

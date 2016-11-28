@@ -62,6 +62,9 @@ let win = {
 let loose = {
   elem: document.querySelector(".loose")
 };
+let keyInfo = {
+  elem: document.querySelector(".keyInfo")
+};
 
 function init() {
   bullets = [];
@@ -69,6 +72,7 @@ function init() {
   bonuss = [];
   score.value = 0;
   showElement(spaceship);
+  new Hearts();
   createMonsters();
   loop();
 }
@@ -97,7 +101,7 @@ function update() {
   deleteOutBullet();
   deleteOutMonsterBombs();
   deleteOutBonus();
-
+  checkHearts();
   checkWinState();
 }
 
@@ -163,7 +167,7 @@ function spaceshipFire() {
     let activeBonus = Bonus.getActiveBonus();
 
     if(typeof activeBonus !== "undefined" && activeBonus.type.name === "bulletHz"){
-      Bullet.setHz(10);
+      Bullet.setHz(50);
     }
     else{
       Bullet.setHz(75);
@@ -271,6 +275,7 @@ function deleteOutBonus(){
 
 function checkCollisions(){
   _.forEach(monsters, (monster) => {
+    //monster => buller
     _.forEach(bullets, (bullet) => {
       if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined" &&
           bullet !== null && bullet.elem !== null &&
@@ -288,13 +293,19 @@ function checkCollisions(){
       }
     });
 
+    //monster => spaceship
     if(typeof monster !== "undefined" && typeof monster.elem !== "undefined"){
       if (collisionAABB(spaceship, monster)) {
-        resetGame();
+        // resetGame();
+        new Boum(monster);
+        monster.remove();
+        _.remove(monsters, monster);
+        Hearts.looseOneHealth();
         return false;
       }
     }
   });
+  //bullet => monstaer
   _.forEach(monsterBombs, (monsterBomb) => {
     _.forEach(bullets, (bullet) => {
       if(typeof bullet !== "undefined" && typeof bullet.elem !== "undefined" &&
@@ -309,15 +320,21 @@ function checkCollisions(){
         }
       }
     });
+    // monsterBomb => spachship
     _.forEach(monsterBombs, (monsterBomb) => {
       if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
         if (collisionAABB(spaceship, monsterBomb)) {
-          resetGame();
+          // resetGame();
+          new Boum(monsterBomb);
+          monsterBomb.remove();
+          _.remove(monsterBombs, monsterBomb);
+          Hearts.looseOneHealth();
           return false;
         }
       }
     });
   });
+  //bonus => spaceship
   _.forEach(bonuss, (bonus) => {
     if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
       if (collisionAABB(spaceship, bonus)) {
@@ -454,6 +471,7 @@ function resetGame(){
   showElement(loose);
   showElement(buttonReStart);
   hideElement(buttonStart);
+  hideElement(keyInfo);
   hideElement(buttonContinue);
   hideElement(buttonPause);
   gameStarted = false;
@@ -469,6 +487,13 @@ function resetGame(){
 
 }
 
+function checkHearts(){
+  if(Hearts.getHealth() === 0){
+    Hearts.removeAll();
+    resetGame();
+  }
+}
+
 function checkWinState(){
   if(_.isArray(monsters) && monsters.length === 0 && _.isArray(monsterBombs) && monsterBombs.length === 0){
     removeAllBonuss();
@@ -476,6 +501,7 @@ function checkWinState(){
     showElement(win);
     hideElement(loose);
     showElement(buttonReStart);
+    hideElement(keyInfo);
     hideElement(buttonStart);
     hideElement(buttonContinue);
     hideElement(buttonPause);
@@ -488,8 +514,11 @@ function pauseGame(){
   showElement(menu);
   showElement(buttonContinue);
   showElement(buttonReStart);
+  showElement(keyInfo);
   hideElement(buttonStart);
   hideElement(buttonPause);
+  hideElement(win);
+  hideElement(loose);
   loop();
 }
 
@@ -500,6 +529,7 @@ function startGame(){
   showElement(buttonPause);
   showElement(buttonContinue);
   showElement(buttonReStart);
+  hideElement(keyInfo);
   hideElement(buttonStart);
   init();
 }

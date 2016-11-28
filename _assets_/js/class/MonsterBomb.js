@@ -20,7 +20,7 @@ class MonsterBomb extends DomElem{
     this.elem.className = "monsterBomb";
     this.elem.style.width = this.width + "px";
     this.elem.style.height = this.height + "px";
-    if(monster !== null && monster.elem !== null && this.element !== null){
+    if(monster !== null && monster.elem !== null && monster.elem.parentNode !== null && this.element !== null){
       monster.elem.parentNode.insertBefore(this.elem, monster.elem);
     }
     this.elem.style.transform = "translate(" + this.x + "px, " + this.y + "px)";

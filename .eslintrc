@@ -37,7 +37,8 @@
     "Monster": true,
     "Utils": true,
     "Bonus": true,
-    "DomElem": true
+    "DomElem": true,
+    "Hearts": true
   },
   "extends": "eslint:recommended"
 }

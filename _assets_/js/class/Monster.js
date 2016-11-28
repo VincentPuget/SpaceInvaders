@@ -58,7 +58,7 @@ class Monster extends DomElem{
     this.elem.className = monster_.className;
     this.elem.style.width = this.width + "px";
     this.elem.style.height = this.height + "px";
-    if(spaceship !== null && spaceship.elem !== null && this.element !== null){
+    if(spaceship !== null && spaceship.elem !== null && spaceship.elem.parentNode !== null && this.element !== null){
       spaceship.elem.parentNode.insertBefore(this.elem, spaceship.elem);
     }
     return this;
