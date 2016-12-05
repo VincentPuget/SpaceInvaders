@@ -7,15 +7,45 @@ let bonusSpeed = 1;
 let bonusAvailables = [
   {
     name: "bonusTripleFire",
-    active: false
+    active: false,
+    action: () => {
+      let spaceship = Spaceship.get();
+      spaceship.tripleFire = true;
+    },
+    default: () => {
+      let spaceship = Spaceship.get();
+      spaceship.tripleFire = false;
+    }
   },
   {
     name: "speedSpaceShip",
-    active: false
+    active: false,
+    action: () => {
+      let spaceship = Spaceship.get();
+      spaceship.speed = 9;
+    },
+    default: () => {
+      let spaceship = Spaceship.get();
+      spaceship.speed = 6;
+    }
   },
   {
     name: "bulletHz",
-    active: false
+    active: false,
+    action: () => {
+      Bullet.setHz(50);
+    },
+    default: () => {
+      Bullet.setHz(75);
+    }
+  },
+  {
+    name: "newHealth",
+    active: false,
+    action: () => {
+      Hearts.getOneHealth();
+    },
+    default: () => {}
   }
 ];
 let bonusActive;
@@ -31,7 +61,7 @@ class Bonus extends DomElem{
     this.width = bonusWidth;
     this.height = bonusHeight;
     this.speed = bonusSpeed;
-    this.type = Bonus.getRandomBonusType();
+    this.config = Bonus.getRandomBonusConfig();
 
     this.elem.className = "bonus";
     this.elem.style.width = this.width + "px";
@@ -43,19 +73,19 @@ class Bonus extends DomElem{
     return this;
   }
 
-  static getRandomBonusType(){
+  static getRandomBonusConfig(){
     let randBonus = Utils.getRandomInt(0, bonusAvailables.length - 1);
     bonusAvailables[randBonus].active = true;
     return bonusAvailables[randBonus];
   }
 
   static setActiveBonus(bonus){
-    bonus.type.active = true;
-    bonusActive = bonus;
+    bonus.config.action();
   }
 
   static rasAllBonus(){
     _.forEach(bonusAvailables, (oneBonus) => {
+      oneBonus.default();
       oneBonus.active = false;
     });
     bonusActive = undefined;

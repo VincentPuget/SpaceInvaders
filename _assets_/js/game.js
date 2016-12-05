@@ -164,16 +164,7 @@ function spaceshipFire() {
     let bullet = new Bullet("center");
     bullets.push(bullet);
 
-    let activeBonus = Bonus.getActiveBonus();
-
-    if(typeof activeBonus !== "undefined" && activeBonus.type.name === "bulletHz"){
-      Bullet.setHz(50);
-    }
-    else{
-      Bullet.setHz(75);
-    }
-
-    if(typeof activeBonus !== "undefined" && activeBonus.type.name === "bonusTripleFire"){
+    if(spaceship.tripleFire){
       let bulletLeft = new Bullet("left");
       bullets.push(bulletLeft);
 

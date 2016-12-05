@@ -22,20 +22,13 @@ class Spaceship extends DomElem{
     this.moveUp = false;
     this.moveDown = false;
     this.fire = false;
+    this.tripleFire = false;
 
     spaceship_ = this;
     return this;
   }
 
   move() {
-    let activeBonus = Bonus.getActiveBonus();
-    if(typeof activeBonus !== "undefined" && activeBonus.type.name === "speedSpaceShip"){
-      this.speed = 9;
-    }
-    else{
-      this.speed = 6;
-    }
-
     if (this.moveLeft) {
       this.x -= this.speed;
     }
