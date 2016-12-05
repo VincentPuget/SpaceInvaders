@@ -49,6 +49,10 @@ let score = {
   value: 0
 };
 
+let health = {
+  elem: document.querySelector(".health")
+};
+
 let menu = {
   elem: document.querySelector(".menu")
 };
@@ -459,6 +463,8 @@ function resetGame(){
 
   showElement(menu);
   hideElement(win);
+  hideElement(score);
+  hideElement(health);
   showElement(loose);
   showElement(buttonReStart);
   hideElement(buttonStart);
@@ -491,6 +497,8 @@ function checkWinState(){
     showElement(menu);
     showElement(win);
     hideElement(loose);
+    hideElement(score);
+    hideElement(health);
     showElement(buttonReStart);
     hideElement(keyInfo);
     hideElement(buttonStart);
@@ -520,6 +528,8 @@ function startGame(){
   showElement(buttonPause);
   showElement(buttonContinue);
   showElement(buttonReStart);
+  showElement(score);
+  showElement(health);
   hideElement(keyInfo);
   hideElement(buttonStart);
   init();
@@ -530,6 +540,8 @@ function restartGame(){
   resetGame();
   hideElement(menu);
   showElement(buttonPause);
+  showElement(score);
+  showElement(health);
   gameStarted = true;
   init();
 }

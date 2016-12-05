@@ -1,7 +1,7 @@
 "use strict";
 
 
-let health = 3;
+let healthNum = 3;
 const maxHealth = 3;
 const HEART_WIDTH = 35;
 const HEART_HEART = 30;
@@ -15,7 +15,7 @@ class Hearts extends DomElem{
   }
 
   createHeart(){
-    health = 3;
+    healthNum = 3;
 
     for (var i = 0; i < maxHealth; i++) {
       let heart = {
@@ -40,27 +40,27 @@ class Hearts extends DomElem{
   }
 
   static getHealth(){
-    return health;
+    return healthNum;
   }
 
   static getOneHealth(){
-    if(health < maxHealth){
-      health += 1;
+    if(healthNum < maxHealth){
+      healthNum += 1;
     }
     Hearts.display();
 
   }
 
   static looseOneHealth(){
-    if(health > 0){
-      health -= 1;
+    if(healthNum > 0){
+      healthNum -= 1;
     }
     Hearts.display();
   }
 
   static display(){
     for (var i = 0; i < hearts.length; i++) {
-      if(i <= health - 1){
+      if(i <= healthNum - 1){
         hearts[i].elem.classList.remove("lost");
       }
       else{
@@ -71,8 +71,10 @@ class Hearts extends DomElem{
 
   static removeAll(){
     _.forEach(hearts, (heart) => {
-      heart.elem.remove();
-      _.remove(hearts, heart);
+      if(typeof heart !== "undefined" && typeof heart.elem !== "undefined"){
+        heart.elem.remove();
+        _.remove(hearts, heart);
+      }
     });
   }
 }
