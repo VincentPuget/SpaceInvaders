@@ -118,7 +118,7 @@ function chooseMonsterForBombing(){
 }
 
 function randomBonus(){
-  let rand = Utils.getRandomInt(1, 100);
+  let rand = Utils.getRandomInt(1, 1000);
   if(rand < 10 && bonuss.length < 2){
     createBonus();
   }
