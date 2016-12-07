@@ -73,6 +73,12 @@ class Bonus extends DomElem{
     return this;
   }
 
+  displayIcon(){
+    BonusIcon.reset();
+    console.log(this.config.name);
+    new BonusIcon(this.config.name);
+  }
+
   static getRandomBonusConfig(){
     let randBonus = Utils.getRandomInt(0, bonusAvailables.length - 1);
     bonusAvailables[randBonus].active = true;

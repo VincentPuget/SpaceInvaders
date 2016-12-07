@@ -53,6 +53,10 @@ let health = {
   elem: document.querySelector(".health")
 };
 
+let bonusIconContainer = {
+  elem: document.querySelector(".bonusIconsContainer")
+};
+
 let menu = {
   elem: document.querySelector(".menu")
 };
@@ -327,6 +331,7 @@ function checkCollisions(){
       if (collisionAABB(spaceship, bonus)) {
         Bonus.rasAllBonus();
         Bonus.setActiveBonus(bonus);
+        bonus.displayIcon();
         bonus.remove();
         _.remove(bonuss, bonus);
       }

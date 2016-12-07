@@ -173,6 +173,33 @@ html{
     }
   }
 
+  .bonusIconsContainer{
+    width: 60px;
+    height: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .bonusIcon{
+      position: relative;
+      width: 40px;
+      height: 40px;
+      margin: 10px;
+      &.bonusTripleFire{
+        background: url("/images/tripleFire.png");
+      }
+      &.speedSpaceShip{
+        background: url("/images/spaceshipSpeed.png");
+      }
+      &.bulletHz{
+        background: url("/images/bulletHz.png");
+      }
+      &.newHealth{
+        background: url("/images/heart.png");
+      }
+    }
+  }
+
   .score{
     right: 0;
     top: 0px;
