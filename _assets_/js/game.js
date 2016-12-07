@@ -91,7 +91,7 @@ function hideElement(el){
 
 
 function update() {
-  moveSpaceship();
+  spaceship.move();
   moveBullets();
   moveMonsters();
   chooseMonsterForBombing();
@@ -99,7 +99,7 @@ function update() {
   randomBonus();
   moveBonus();
   spaceshipFire();
-  containSpaceships();
+  spaceship.contain();
   checkCollisions();
   checkMonsterPosition();
   deleteOutBullet();
@@ -152,14 +152,6 @@ function loop() {
     update();
     render();
   }
-}
-
-function containSpaceships() {
-  spaceship.x = Math.max(0, spaceship.x); // débordement à gauche (spaceship.x devient négatif)
-  spaceship.x = Math.min(screen.width - spaceship.width, spaceship.x);// débordement à droite
-
-  spaceship.y = Math.max(0, spaceship.y); // débordement en haut (spaceship.y devient négatif)
-  spaceship.y = Math.min(screen.height - spaceship.height, spaceship.y);// débordement en bas
 }
 
 function spaceshipFire() {

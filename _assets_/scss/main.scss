@@ -15,16 +15,24 @@ html{
   background: #0c1523;
 }
 
-.content{
-  width: 100%;
-  height: 100%;
-  display: flex;
-}
 
-.screen,
-.screen * {
+.game,
+.game *,{
   position: absolute;
 }
+
+.game{
+  width: 90%;
+  height: 90%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  box-shadow: 0 0 0 8px #666;
+}
+
 
 .hide{
   opacity: 0;
@@ -42,7 +50,7 @@ html{
   top: 0;
   bottom: 0;
   margin: auto;
-  box-shadow: 0 0 0 8px #666;
+
   overflow: hidden;
 
   @keyframes spriteAnimationMiniBoum {
@@ -129,121 +137,123 @@ html{
     animation: spriteAnimationSpaceship .4s steps(4) infinite;
   }
 
-  .ui{
-    width: 100%;
-    height: 100%;
-    // position: relative;
 
-    .pause{
-      width: 40px;
-      height: 44px;
-      top: 0px;
-      // right: 24px;
-    }
+}
 
-    .health{
-      width: 125px;
+.ui{
+  width: 100%;
+  height: 100%;
+  // position: relative;
+
+  .pause{
+    width: 40px;
+    height: 44px;
+    top: 0px;
+    // right: 24px;
+  }
+
+  .health{
+    width: 125px;
+    height: 30px;
+    padding: 5px;
+    left:0;
+    right: 0;
+    margin: auto;
+    .heart{
+      width: 35px;
       height: 30px;
-      padding: 5px;
-      left:0;
-      right: 0;
-      margin: auto;
-      .heart{
-        width: 35px;
-        height: 30px;
-        background: url("/images/spriteHeart.png");
-        background-position: -70px;
-      }
-      .heart.lost{
-        width: 35px;
-        height: 30px;
-        background: url("/images/spriteHeart.png");
-        background-position: -35px;
-      }
+      background: url("/images/spriteHeart.png");
+      background-position: -70px;
     }
+    .heart.lost{
+      width: 35px;
+      height: 30px;
+      background: url("/images/spriteHeart.png");
+      background-position: -35px;
+    }
+  }
 
-    .score{
-      right: 0;
-      top: 0px;
+  .score{
+    right: 0;
+    top: 0px;
+    color: white;
+    padding: 10px;
+    font: bold 2em/1 "Roboto Mono", monospace;
+  }
+
+  .keyInfo{
+    font-family: "CosmicAlien";
+    color: #FFFFFF;
+    font-size: 1.2em;
+    text-align: center;
+    padding:  00px 10px 10px 10px;
+    div{
+      padding:  00px 00px 10px 00px;
+    }
+  }
+  .buttons{
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .button{
+    cursor: pointer;
+    color: white;
+    margin: 10px;
+    flex-grow: 1;
+    padding: 10px;
+    font-family: "CosmicAlien";
+    background: #4b6287;
+    border-radius: 5px;
+    border: solid 2px white;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .button:hover{
+    background: #202a3a;
+  }
+
+  .menu *,
+  .result *{
+    position: relative;
+  }
+
+  .menu,
+  .result{
+    width: 600px;
+    height: 470px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #2f405b;
+    box-shadow: 0 0 0 8px #666;
+    transition: all 0.2s;
+    .title{
+      width: 100%;
       color: white;
-      padding: 10px;
-      font: bold 2em/1 "Roboto Mono", monospace;
-    }
-
-    .keyInfo{
+      padding: 30px 20px 20px 20px;
       font-family: "CosmicAlien";
-      color: #FFFFFF;
-      font-size: 1.2em;
+      font-size: 2em;
+      font-style: italic;
       text-align: center;
-      padding:  00px 10px 10px 10px;
-      div{
-        padding:  00px 00px 10px 00px;
-      }
     }
-    .buttons{
-      width: 60%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: row;
+    .logo{
+      display: block;
+      text-align: center;
+      padding: 10px 20px 30px 20px;
     }
-
-    .button{
-      cursor: pointer;
+    .win,
+    .loose{
       color: white;
-      margin: 10px;
-      flex-grow: 1;
-      padding: 10px;
+      padding: 30px 20px 20px 20px;
       font-family: "CosmicAlien";
-      background: #4b6287;
-      border-radius: 5px;
-      border: solid 2px white;
+      font-size: 2em;
+      font-style: italic;
       text-align: center;
-      transition: all 0.2s;
-    }
-    .button:hover{
-      background: #202a3a;
-    }
-
-    .menu *,
-    .result *{
-      position: relative;
-    }
-
-    .menu,
-    .result{
-      width: 600px;
-      height: 470px;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      background: #2f405b;
-      box-shadow: 0 0 0 8px #666;
-      transition: all 0.2s;
-      .title{
-        width: 100%;
-        color: white;
-        padding: 30px 20px 20px 20px;
-        font-family: "CosmicAlien";
-        font-size: 2em;
-        font-style: italic;
-        text-align: center;
-      }
-      .logo{
-        display: block;
-        text-align: center;
-        padding: 10px 20px 30px 20px;
-      }
-      .win,
-      .loose{
-        color: white;
-        padding: 30px 20px 20px 20px;
-        font-family: "CosmicAlien";
-        font-size: 2em;
-        font-style: italic;
-        text-align: center;
-      }
     }
   }
 }
