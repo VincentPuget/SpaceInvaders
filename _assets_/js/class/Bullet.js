@@ -4,7 +4,7 @@ const BULET_WIDTH = 2;
 const BULLET_HEIGHT = 8;
 
 let bulletSpeed = 8;
-let bulletHz = 75;
+let bulletHz = 100;
 
 
 class Bullet extends DomElem{

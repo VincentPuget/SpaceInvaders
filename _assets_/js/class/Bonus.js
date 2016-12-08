@@ -33,10 +33,10 @@ let bonusAvailables = [
     name: "bulletHz",
     active: false,
     action: () => {
-      Bullet.setHz(50);
+      Bullet.setHz(75);
     },
     default: () => {
-      Bullet.setHz(75);
+      Bullet.setHz(100);
     }
   },
   {
@@ -75,7 +75,6 @@ class Bonus extends DomElem{
 
   displayIcon(){
     BonusIcon.reset();
-    console.log(this.config.name);
     new BonusIcon(this.config.name);
   }
 

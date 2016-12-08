@@ -43,6 +43,11 @@ class Spaceship extends DomElem{
     }
   }
 
+  replaceInScreen(){
+    this.x = (screen.width - this.width) / 2;
+    this.y = screen.height - this.height - 4;
+  }
+
   contain() {
     let screen = Screen.get();
     this.x = Math.max(0, this.x); // débordement à gauche (this.x devient négatif)

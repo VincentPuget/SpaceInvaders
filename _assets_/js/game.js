@@ -469,15 +469,16 @@ function resetGame(){
   hideElement(buttonContinue);
   hideElement(buttonPause);
   gameStarted = false;
-  Bonus.rasAllBonus();
 
   removeAllBullets();
   removeAllMonsters();
   removeAllMonsterBombs();
   removeAllBonuss();
 
-  spaceship.x = (screen.width - spaceship.width) / 2;
-  spaceship.y = screen.height - spaceship.height - 4;
+  Bonus.rasAllBonus();
+  BonusIcon.reset();
+
+  spaceship.replaceInScreen();
 
 }
 
@@ -501,6 +502,8 @@ function checkWinState(){
     hideElement(buttonStart);
     hideElement(buttonContinue);
     hideElement(buttonPause);
+    Bonus.rasAllBonus();
+    BonusIcon.reset();
     gameStarted = false;
   }
 }
