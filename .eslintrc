@@ -39,7 +39,8 @@
     "Bonus": true,
     "DomElem": true,
     "Hearts": true,
-    "BonusIcon": true
+    "BonusIcon": true,
+    "Sound": true
   },
   "extends": "eslint:recommended"
 }

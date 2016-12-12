@@ -40,6 +40,12 @@ let paths = {
     ],
     dest: "assets/images/"
   },
+  sounds: {
+    src: [
+      "_assets_/sounds/**/*"
+    ],
+    dest: "assets/sounds/"
+  },
   sass: {
     src: [
       "_assets_/scss/main.scss"
@@ -161,6 +167,7 @@ gulp.task("js", () => {
     .pipe(order([
       "class/DomElem.js",
       "class/Screen.js",
+      "class/Sound.js",
       "**/*.js"
     ]))
     .pipe(gulpif(prod, babel()))
@@ -197,6 +204,13 @@ gulp.task("images", () => {
   process.stdout.write(chalk.magenta("images\r\n"));
   return gulp.src(paths.images.src)
     .pipe(gulp.dest(paths.images.dest))
+    .pipe(reload({ stream: true }));
+});
+
+gulp.task("sounds", () => {
+  process.stdout.write(chalk.magenta("sounds\r\n"));
+  return gulp.src(paths.sounds.src)
+    .pipe(gulp.dest(paths.sounds.dest))
     .pipe(reload({ stream: true }));
 });
 
@@ -237,7 +251,7 @@ function logEnv(){
   process.stdout.write(chalk.green("|***************************************|\r\n"));
 }
 
-gulp.task("build", gulp.series("fonts", "images"/*, "sassVendor"*/, "sass", "jsVendor", "js", "jsServiceWorker", "manifest", "browserconfig" , function(done){
+gulp.task("build", gulp.series("fonts", "images", "sounds"/*, "sassVendor"*/, "sass", "jsVendor", "js", "jsServiceWorker", "manifest", "browserconfig" , function(done){
   process.stdout.write(chalk.magenta("build\r\n"));
   logEnv();
   done();

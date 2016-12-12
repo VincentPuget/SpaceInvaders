@@ -25,6 +25,7 @@ let monsters = [];
 let monsterBombs = [];
 let bonuss = [];
 
+let sound = new Sound();
 
 let spaceship = new Spaceship();
 
@@ -163,6 +164,8 @@ function spaceshipFire() {
 
     let bullet = new Bullet("center");
     bullets.push(bullet);
+
+    sound.play("laser");
 
     if(spaceship.tripleFire){
       let bulletLeft = new Bullet("left");
