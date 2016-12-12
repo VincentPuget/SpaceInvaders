@@ -329,6 +329,7 @@ function checkCollisions(){
   _.forEach(bonuss, (bonus) => {
     if(typeof bonus !== "undefined" && typeof bonus.elem !== "undefined"){
       if (collisionAABB(spaceship, bonus)) {
+        new Boum(bonus);
         Bonus.rasAllBonus();
         Bonus.setActiveBonus(bonus);
         bonus.displayIcon();
