@@ -25,12 +25,18 @@ let monsters = [];
 let monsterBombs = [];
 let bonuss = [];
 
+let gameAsSound = true;
+
 let sound = new Sound();
 
 let spaceship = new Spaceship();
 
 let buttonPause = {
   elem: document.querySelector(".buttonPause")
+};
+
+let buttonSound = {
+  elem: document.querySelector(".buttonSound")
 };
 
 let buttonStart = {
@@ -165,7 +171,9 @@ function spaceshipFire() {
     let bullet = new Bullet("center");
     bullets.push(bullet);
 
-    sound.play("laser");
+    if(gameAsSound){
+      sound.play("laser");
+    }
 
     if(spaceship.tripleFire){
       let bulletLeft = new Bullet("left");
@@ -423,6 +431,10 @@ function addEventListeners() {
   buttonContinue.elem.addEventListener("click", (event) => {
     continueGame();
   });
+
+  buttonSound.elem.addEventListener("click", (event) => {
+    toggleSound();
+  });
 }
 
 function removeAllBullets(){
@@ -472,6 +484,7 @@ function resetGame(){
   hideElement(keyInfo);
   hideElement(buttonContinue);
   hideElement(buttonPause);
+  hideElement(buttonSound);
   gameStarted = false;
 
   removeAllBullets();
@@ -506,6 +519,7 @@ function checkWinState(){
     hideElement(buttonStart);
     hideElement(buttonContinue);
     hideElement(buttonPause);
+    hideElement(buttonSound);
     Bonus.rasAllBonus();
     BonusIcon.reset();
     gameStarted = false;
@@ -519,7 +533,8 @@ function pauseGame(){
   showElement(buttonReStart);
   showElement(keyInfo);
   hideElement(buttonStart);
-  hideElement(buttonPause);
+  // hideElement(buttonPause);
+  // hideElement(buttonSound);
   hideElement(win);
   hideElement(loose);
   loop();
@@ -530,6 +545,7 @@ function startGame(){
   gameStarted = true;
   hideElement(menu);
   showElement(buttonPause);
+  showElement(buttonSound);
   showElement(buttonContinue);
   showElement(buttonReStart);
   showElement(score);
@@ -544,6 +560,7 @@ function restartGame(){
   resetGame();
   hideElement(menu);
   showElement(buttonPause);
+  showElement(buttonSound);
   showElement(score);
   showElement(health);
   gameStarted = true;
@@ -555,9 +572,23 @@ function continueGame(){
   gameStarted = true;
   hideElement(menu);
   showElement(buttonPause);
+  showElement(buttonSound);
   loop();
+}
+
+function toggleSound(){
+  gameAsSound = !gameAsSound;
+  if(gameAsSound){
+    buttonSound.elem.classList.remove("off");
+    buttonSound.elem.classList.add("on");
+  }
+  else{
+    buttonSound.elem.classList.remove("on");
+    buttonSound.elem.classList.add("off");
+  }
 }
 
 
 addEventListeners();
-hideElement(buttonPause);
+// hideElement(buttonPause);
+// hideElement(buttonSound);

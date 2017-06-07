@@ -147,9 +147,35 @@ html{
 
   .pause{
     width: 40px;
-    height: 44px;
+    height: 40px;
     top: 0px;
+    color: white;
+    font-family: "CosmicAlien";
     // right: 24px;
+  }
+  .sound{
+    width: 40px;
+    height: 40px;
+    // top: 10px;
+    left: 50px;
+    color: white;
+    .buttonSoundContainer{
+      width: 40px;
+      height: 36px;
+      .buttonSound{
+        top: 3px;
+        left: 2px;
+        width: 35px;
+        height: 30px;
+        background-image: url("/images/spriteSound.png");
+      }
+      .buttonSound.on{
+        background-position: -70px;
+      }
+      .buttonSound.off{
+        background-position: -35px;
+      }
+    }
   }
 
   .health{
@@ -166,9 +192,6 @@ html{
       background-position: -70px;
     }
     .heart.lost{
-      width: 35px;
-      height: 30px;
-      background: url("/images/spriteHeart.png");
       background-position: -35px;
     }
   }
@@ -237,9 +260,15 @@ html{
     border: solid 2px white;
     text-align: center;
     transition: all 0.2s;
+    &.noPadding{
+      padding: 0;
+    }
   }
   .button:hover{
     background: #202a3a;
+  }
+  .buttonClear{
+    cursor: pointer;
   }
 
   .menu *,
