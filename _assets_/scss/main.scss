@@ -50,7 +50,7 @@ html{
   top: 0;
   bottom: 0;
   margin: auto;
-
+  transform: translateZ(0);
   overflow: hidden;
 
   @keyframes spriteAnimationMiniBoum {
@@ -184,6 +184,7 @@ html{
     padding: 5px;
     left:0;
     right: 0;
+    top: 10px;
     margin: auto;
     .heart{
       width: 35px;
@@ -228,7 +229,8 @@ html{
     top: 0px;
     color: white;
     padding: 10px;
-    font: bold 2em/1 "Roboto Mono", monospace;
+    font-family: "CosmicAlien";
+    font-size: 1.2em;
   }
 
   .keyInfo{

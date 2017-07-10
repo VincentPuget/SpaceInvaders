@@ -35,6 +35,9 @@ let buttonPause = {
   elem: document.querySelector(".buttonPause")
 };
 
+let buttonSoundContainer = {
+  elem: document.querySelector(".buttonSoundContainer")
+};
 let buttonSound = {
   elem: document.querySelector(".buttonSound")
 };
@@ -95,9 +98,19 @@ function init() {
 function showElement(el){
   el.elem.classList.remove("hide");
 }
+function showElements(els){
+  _.forEach(els, (el) => {
+    showElement(el);
+  });
+}
 
 function hideElement(el){
   el.elem.classList.add("hide");
+}
+function hideElements(els){
+  _.forEach(els, (el) => {
+    hideElement(el);
+  });
 }
 
 
@@ -256,9 +269,13 @@ function deleteOutBullet(){
 function deleteOutMonsterBombs(){
   _.forEach(monsterBombs, (monsterBomb) => {
     if(typeof monsterBomb !== "undefined" && typeof monsterBomb.elem !== "undefined"){
-      if(monsterBomb.y > screen.height){
-        monsterBomb.remove();
-        _.remove(monsterBombs, monsterBomb);
+      if((monsterBomb.y - monsterBomb.height) > screen.height){
+        // explosion de la bombe sur le sol.
+        new MiniBoum(monsterBomb);
+        if(monsterBomb.y > screen.height){
+          monsterBomb.remove();
+          _.remove(monsterBombs, monsterBomb);
+        }
       }
     }
   });
@@ -474,17 +491,9 @@ function resetGame(){
   window.cancelAnimationFrame(requestId);
   requestId = undefined;
 
-  showElement(menu);
-  hideElement(win);
-  hideElement(score);
-  hideElement(health);
-  showElement(loose);
-  showElement(buttonReStart);
-  hideElement(buttonStart);
-  hideElement(keyInfo);
-  hideElement(buttonContinue);
-  hideElement(buttonPause);
-  hideElement(buttonSound);
+  showElements([menu, buttonReStart, loose]);
+  hideElements([win, score, health, buttonStart, keyInfo, buttonContinue, buttonPause, buttonSoundContainer]);
+
   gameStarted = false;
 
   removeAllBullets();
@@ -509,17 +518,8 @@ function checkHearts(){
 function checkWinState(){
   if(_.isArray(monsters) && monsters.length === 0 && _.isArray(monsterBombs) && monsterBombs.length === 0){
     removeAllBonuss();
-    showElement(menu);
-    showElement(win);
-    hideElement(loose);
-    hideElement(score);
-    hideElement(health);
-    showElement(buttonReStart);
-    hideElement(keyInfo);
-    hideElement(buttonStart);
-    hideElement(buttonContinue);
-    hideElement(buttonPause);
-    hideElement(buttonSound);
+    showElements([menu, win, buttonReStart]);
+    hideElements([loose, score, health, keyInfo, buttonStart, buttonContinue, buttonPause, buttonSoundContainer]);
     Bonus.rasAllBonus();
     BonusIcon.reset();
     gameStarted = false;
@@ -528,41 +528,24 @@ function checkWinState(){
 
 function pauseGame(){
   pause = true;
-  showElement(menu);
-  showElement(buttonContinue);
-  showElement(buttonReStart);
-  showElement(keyInfo);
-  hideElement(buttonStart);
-  // hideElement(buttonPause);
-  // hideElement(buttonSound);
-  hideElement(win);
-  hideElement(loose);
+  showElements([menu, buttonContinue, buttonReStart, keyInfo]);
+  hideElements([buttonStart, win, loose]);
   loop();
 }
 
 function startGame(){
   pause = false;
   gameStarted = true;
-  hideElement(menu);
-  showElement(buttonPause);
-  showElement(buttonSound);
-  showElement(buttonContinue);
-  showElement(buttonReStart);
-  showElement(score);
-  showElement(health);
-  hideElement(keyInfo);
-  hideElement(buttonStart);
+  showElements([buttonPause, buttonSoundContainer, buttonContinue, buttonReStart, score, health]);
+  hideElements([menu, keyInfo, buttonStart]);
   init();
 }
 
 function restartGame(){
   pause = false;
   resetGame();
-  hideElement(menu);
-  showElement(buttonPause);
-  showElement(buttonSound);
-  showElement(score);
-  showElement(health);
+  hideElements([menu]);
+  showElements([buttonPause, buttonSoundContainer, score, health]);
   gameStarted = true;
   init();
 }
@@ -570,9 +553,8 @@ function restartGame(){
 function continueGame(){
   pause = false;
   gameStarted = true;
-  hideElement(menu);
-  showElement(buttonPause);
-  showElement(buttonSound);
+  hideElements([menu]);
+  showElements([buttonPause, buttonSoundContainer]);
   loop();
 }
 
@@ -590,5 +572,3 @@ function toggleSound(){
 
 
 addEventListeners();
-// hideElement(buttonPause);
-// hideElement(buttonSound);
