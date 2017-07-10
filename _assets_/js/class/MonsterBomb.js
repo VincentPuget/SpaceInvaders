@@ -11,10 +11,10 @@ class MonsterBomb extends DomElem{
     super();
     if(typeof monster === "undefined") { return; }
     this.elem = document.createElement("div");
-    this.x = monster.x;
-    this.y = monster.y;
     this.width = MONSTER_BOMB_WIDTH;
     this.height = MONSTER_BOMB_HEIGHT;
+    this.x = monster.x + (monster.width - this.width) / 2;
+    this.y = monster.y;
     this.speed = monsterBombSpeed;
     this.point = monsterBombPoint;
     this.elem.className = "monsterBomb";
