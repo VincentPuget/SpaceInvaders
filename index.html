@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div class="game">
+      <div class="screen">
+        <div class="spaceship hide"></div>
+      </div>
+      <div class="ui">
+        <div class="pause">
+          <div class="button buttonPause hide">||</div>
+        </div>
+        <div class="sound">
+          <div class="buttonSoundContainer button noPadding hide">
+            <div class="buttonSound on"></div>
+          </div>
+        </div>
+        <div class="health"></div>
+        <div class="bonusIconsContainer"></div>
+        <div class="score"></div>
+        <div class="menu">
+          <div class="title">SpaceInvaders</div>
+          <div class="logo"></div>
+          <div class="win hide">You Win !!!</div>
+          <div class="loose hide">You Loose !!!</div>
+          <div class="keyInfo">
+            <div>Move : &#8678; &#8679; &#8680; &#8681;</div>
+            <div>Fire : space</div>
+          </div>
+          <div class="buttons">
+            <div class="button buttonStart">Start</div>
+            <div class="button buttonReStart hide">reStart</div>
+            <div class="button buttonContinue hide">Continue</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
