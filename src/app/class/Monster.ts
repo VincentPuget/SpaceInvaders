@@ -1,6 +1,6 @@
-import { DomElem } from "./DomElem";
-import { Screen } from "./Screen";
-import { Spaceship } from "./Spaceship";
+import { DomElem } from './DomElem';
+import { Screen } from './Screen';
+import { Spaceship } from './Spaceship';
 
 export interface MonsterConfig {
   width: number;
@@ -18,21 +18,21 @@ export class Monster extends DomElem {
   public static monster1: MonsterConfig = {
     width: 55,
     height: 40,
-    className: "monster_1",
+    className: 'monster_1',
     point: 10,
     speed: 0.3,
   };
   public static monster2: MonsterConfig = {
     width: 40,
     height: 40,
-    className: "monster_2",
+    className: 'monster_2',
     point: 20,
     speed: 0.3,
   };
   public static monster3: MonsterConfig = {
     width: 60,
     height: 40,
-    className: "monster_3",
+    className: 'monster_3',
     point: 30,
     speed: 0.3,
   };
@@ -51,7 +51,7 @@ export class Monster extends DomElem {
       this.monster = Monster.monster3;
     }
 
-    this.elem = document.createElement("div");
+    this.elem = document.createElement('div');
     let paddingX = i === 0 ? 14 : i === 1 ? 30 : 10;
     let paddingY = 10;
     let paddingXall = 20;
@@ -64,13 +64,9 @@ export class Monster extends DomElem {
     this.point = this.monster.point;
 
     this.elem.className = this.monster.className;
-    this.elem.style.width = this.width + "px";
-    this.elem.style.height = this.height + "px";
-    if (
-      spaceship !== null &&
-      spaceship.elem !== null &&
-      spaceship.elem.parentNode !== null
-    ) {
+    this.elem.style.width = this.width + 'px';
+    this.elem.style.height = this.height + 'px';
+    if (spaceship !== null && spaceship.elem !== null && spaceship.elem.parentNode !== null) {
       spaceship.elem.parentNode.insertBefore(this.elem, spaceship.elem);
     }
     return this;
@@ -83,18 +79,9 @@ export class Monster extends DomElem {
 
   static getMonstersByLine(): number {
     let screen: Screen = Screen.get();
-    let monstersByLine1: number =
-      Math.round(
-        screen.width / (Monster.monster1.width + SPACE_ARROUND_MONSTERS)
-      ) - 1;
-    let monstersByLine2: number =
-      Math.round(
-        screen.width / (Monster.monster2.width + SPACE_ARROUND_MONSTERS)
-      ) - 1;
-    let monstersByLine3: number =
-      Math.round(
-        screen.width / (Monster.monster3.width + SPACE_ARROUND_MONSTERS)
-      ) - 1;
+    let monstersByLine1: number = Math.round(screen.width / (Monster.monster1.width + SPACE_ARROUND_MONSTERS)) - 1;
+    let monstersByLine2: number = Math.round(screen.width / (Monster.monster2.width + SPACE_ARROUND_MONSTERS)) - 1;
+    let monstersByLine3: number = Math.round(screen.width / (Monster.monster3.width + SPACE_ARROUND_MONSTERS)) - 1;
 
     let monstersByLine12: number = Math.min(monstersByLine1, monstersByLine2);
     let monstersByLine: number = Math.min(monstersByLine12, monstersByLine3);

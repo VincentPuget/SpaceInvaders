@@ -1,5 +1,5 @@
-import { DomElem } from "./DomElem";
-import { Screen } from "./Screen";
+import { DomElem } from './DomElem';
+import { Screen } from './Screen';
 
 export const SPACESHIP_WIDTH: number = 30;
 export const SPACESHIP_HEIGHT: number = 38;
@@ -18,7 +18,7 @@ export class Spaceship extends DomElem {
   constructor() {
     super();
 
-    const elem: HTMLElement | null = document.querySelector(".spaceship");
+    const elem: HTMLElement | null = document.querySelector('.spaceship');
     if (elem) {
       this.elem = elem;
     }

@@ -1,4 +1,4 @@
-import piou from "../../assets/sounds/piou.mp3";
+import piou from '../../assets/sounds/piou.mp3';
 
 export class Sound {
   public laser: any;
@@ -11,7 +11,7 @@ export class Sound {
     this.laser = {};
     this.laser.ready = false;
     this.laser.audio = new Audio(piou);
-    this.laser.audio.addEventListener("canplaythrough", () => {
+    this.laser.audio.addEventListener('canplaythrough', () => {
       this.laser.ready = true;
     });
   }

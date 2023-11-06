@@ -1,28 +1,28 @@
-import { Bonus } from "./class/Bonus";
-import { BonusIcon } from "./class/BonusIcon";
-import { Boum } from "./class/Boum";
-import { Bullet } from "./class/Bullet";
-import { DomElem } from "./class/DomElem";
-import { Hearts } from "./class/Hearts";
-import { MiniBoum } from "./class/MiniBoum";
-import { Monster } from "./class/Monster";
-import { MonsterBomb } from "./class/MonsterBomb";
-import { Screen } from "./class/Screen";
-import { Sound } from "./class/Sound";
-import { Spaceship } from "./class/Spaceship";
-import { Utils } from "./class/Utils";
+import { Bonus } from './class/Bonus';
+import { BonusIcon } from './class/BonusIcon';
+import { Boum } from './class/Boum';
+import { Bullet } from './class/Bullet';
+import { DomElem } from './class/DomElem';
+import { Hearts } from './class/Hearts';
+import { MiniBoum } from './class/MiniBoum';
+import { Monster } from './class/Monster';
+import { MonsterBomb } from './class/MonsterBomb';
+import { Screen } from './class/Screen';
+import { Sound } from './class/Sound';
+import { Spaceship } from './class/Spaceship';
+import { Utils } from './class/Utils';
 
 export interface Elem {
   elem: Element | HTMLElement | null;
   value?: unknown;
 }
 
-export const KEY_LEFT: string = "ArrowLeft";
-export const KEY_RIGHT: string = "ArrowRight";
-export const KEY_UP: string = "ArrowUp";
-export const KEY_DOWN: string = "ArrowDown";
-export const KEY_ECHAP: string = "Escape";
-export const KEY_SPACE: string = "Space";
+export const KEY_LEFT: string = 'ArrowLeft';
+export const KEY_RIGHT: string = 'ArrowRight';
+export const KEY_UP: string = 'ArrowUp';
+export const KEY_DOWN: string = 'ArrowDown';
+export const KEY_ECHAP: string = 'Escape';
+export const KEY_SPACE: string = 'Space';
 
 export class App {
   public screen: Screen = new Screen();
@@ -44,56 +44,56 @@ export class App {
   public spaceship: Spaceship = new Spaceship();
 
   public buttonPause: Elem = {
-    elem: document.querySelector(".buttonPause"),
+    elem: document.querySelector('.buttonPause'),
   };
 
   public buttonSoundContainer: Elem = {
-    elem: document.querySelector(".buttonSoundContainer"),
+    elem: document.querySelector('.buttonSoundContainer'),
   };
   public buttonSound: Elem = {
-    elem: document.querySelector(".buttonSound"),
+    elem: document.querySelector('.buttonSound'),
   };
 
   public buttonStart: Elem = {
-    elem: document.querySelector(".buttonStart"),
+    elem: document.querySelector('.buttonStart'),
   };
 
   public buttonReStart: Elem = {
-    elem: document.querySelector(".buttonReStart"),
+    elem: document.querySelector('.buttonReStart'),
   };
 
   public buttonContinue: Elem = {
-    elem: document.querySelector(".buttonContinue"),
+    elem: document.querySelector('.buttonContinue'),
   };
 
   public score: Elem = {
-    elem: document.querySelector(".score"),
+    elem: document.querySelector('.score'),
     value: 0,
   };
 
   public health: Elem = {
-    elem: document.querySelector(".health"),
+    elem: document.querySelector('.health'),
   };
 
   public BonusIconContainer: Elem = {
-    elem: document.querySelector(".BonusIconsContainer"),
+    elem: document.querySelector('.BonusIconsContainer'),
   };
 
   public menu: Elem = {
-    elem: document.querySelector(".menu"),
+    elem: document.querySelector('.menu'),
   };
 
   public result: Elem = {
-    elem: document.querySelector(".result"),
+    elem: document.querySelector('.result'),
   };
   public win: Elem = {
-    elem: document.querySelector(".win"),
+    elem: document.querySelector('.win'),
   };
   public loose: Elem = {
-    elem: document.querySelector(".loose"),
+    elem: document.querySelector('.loose'),
   };
   public keyInfo: Elem = {
-    elem: document.querySelector(".keyInfo"),
+    elem: document.querySelector('.keyInfo'),
   };
 
   constructor() {
@@ -112,7 +112,7 @@ export class App {
   }
 
   public showElement(el: Elem): void {
-    el.elem?.classList.remove("hide");
+    el.elem?.classList.remove('hide');
   }
   public showElements(els: Elem[]): void {
     els.forEach((el: Elem) => {
@@ -121,7 +121,7 @@ export class App {
   }
 
   public hideElement(el: Elem): void {
-    el.elem?.classList.add("hide");
+    el.elem?.classList.add('hide');
   }
   public hideElements(els: Elem[]): void {
     els.forEach((el: Elem) => {
@@ -165,32 +165,27 @@ export class App {
 
   public render(): void {
     if (this.spaceship.elem) {
-      (this.spaceship.elem as HTMLElement).style.transform =
-        "translate(" + this.spaceship.x + "px, " + this.spaceship.y + "px)";
+      (this.spaceship.elem as HTMLElement).style.transform = 'translate(' + this.spaceship.x + 'px, ' + this.spaceship.y + 'px)';
     }
 
     this.bullets.forEach((bullet) => {
-      bullet.elem.style.transform =
-        "translate(" + bullet.x + "px, " + bullet.y + "px)";
+      bullet.elem.style.transform = 'translate(' + bullet.x + 'px, ' + bullet.y + 'px)';
     });
 
     this.monsters.forEach((monster) => {
-      monster.elem.style.transform =
-        "translate(" + monster.x + "px, " + monster.y + "px)";
+      monster.elem.style.transform = 'translate(' + monster.x + 'px, ' + monster.y + 'px)';
     });
 
     this.monsterBombs.forEach((monsterBomb) => {
-      monsterBomb.elem.style.transform =
-        "translate(" + monsterBomb.x + "px, " + monsterBomb.y + "px)";
+      monsterBomb.elem.style.transform = 'translate(' + monsterBomb.x + 'px, ' + monsterBomb.y + 'px)';
     });
 
     this.bonuss.forEach((bonus) => {
-      bonus.elem.style.transform =
-        "translate(" + bonus.x + "px, " + bonus.y + "px)";
+      bonus.elem.style.transform = 'translate(' + bonus.x + 'px, ' + bonus.y + 'px)';
     });
 
     if (this.score.elem) {
-      this.score.elem.innerHTML = "Score : " + this.score.value;
+      this.score.elem.innerHTML = 'Score : ' + this.score.value;
     }
   }
 
@@ -204,18 +199,18 @@ export class App {
 
   public spaceshipFire(): void {
     if (this.spaceship.fire && this.bulletTimeout === null) {
-      let bullet = new Bullet("center");
+      let bullet = new Bullet('center');
       this.bullets.push(bullet);
 
       if (this.gameHasSound) {
-        this.sound.play("laser");
+        this.sound.play('laser');
       }
 
       if (this.spaceship.tripleFire) {
-        let bulletLeft = new Bullet("left");
+        let bulletLeft = new Bullet('left');
         this.bullets.push(bulletLeft);
 
-        let bulletRight = new Bullet("right");
+        let bulletRight = new Bullet('right');
         this.bullets.push(bulletRight);
       }
       this.bulletTimeout = setTimeout(() => {
@@ -236,7 +231,7 @@ export class App {
   }
 
   public createMonsterBomb(monster: Monster): void {
-    if (typeof monster === "undefined") {
+    if (typeof monster === 'undefined') {
       return;
     }
     let monsterBomb = new MonsterBomb(monster);
@@ -281,7 +276,7 @@ export class App {
 
   public deleteOutBullet(): void {
     this.bullets.forEach((bullet: Bullet) => {
-      if (typeof bullet !== "undefined" && typeof bullet.elem !== "undefined") {
+      if (typeof bullet !== 'undefined' && typeof bullet.elem !== 'undefined') {
         if (bullet.y < 0) {
           bullet.remove();
           this.bullets = this.bullets.filter((bullet_) => bullet_ !== bullet);
@@ -292,18 +287,13 @@ export class App {
 
   public deleteOutMonsterBombs(): void {
     this.monsterBombs.forEach((monsterBomb: MonsterBomb) => {
-      if (
-        typeof monsterBomb !== "undefined" &&
-        typeof monsterBomb.elem !== "undefined"
-      ) {
+      if (typeof monsterBomb !== 'undefined' && typeof monsterBomb.elem !== 'undefined') {
         if (monsterBomb.y - monsterBomb.height > this.screen.height) {
           // explosion de la bombe sur le sol.
           new MiniBoum(monsterBomb);
           if (monsterBomb.y > this.screen.height) {
             monsterBomb.remove();
-            this.monsterBombs = this.monsterBombs.filter(
-              (monsterBomb_) => monsterBomb_ !== monsterBomb
-            );
+            this.monsterBombs = this.monsterBombs.filter((monsterBomb_) => monsterBomb_ !== monsterBomb);
           }
         }
       }
@@ -312,7 +302,7 @@ export class App {
 
   public deleteOutBonus(): void {
     this.bonuss.forEach((bonus: Bonus) => {
-      if (typeof bonus !== "undefined" && typeof bonus.elem !== "undefined") {
+      if (typeof bonus !== 'undefined' && typeof bonus.elem !== 'undefined') {
         if (bonus.y > this.screen.height) {
           bonus.remove();
           this.bonuss = this.bonuss.filter((bonus_) => bonus_ !== bonus);
@@ -326,12 +316,12 @@ export class App {
       //monster => buller
       this.bullets.forEach((bullet: Bullet) => {
         if (
-          typeof bullet !== "undefined" &&
-          typeof bullet.elem !== "undefined" &&
+          typeof bullet !== 'undefined' &&
+          typeof bullet.elem !== 'undefined' &&
           bullet !== null &&
           bullet.elem !== null &&
-          typeof monster !== "undefined" &&
-          typeof monster.elem !== "undefined" &&
+          typeof monster !== 'undefined' &&
+          typeof monster.elem !== 'undefined' &&
           monster !== null &&
           monster.elem !== null
         ) {
@@ -341,25 +331,18 @@ export class App {
             bullet.remove();
             monster.remove();
             this.bullets = this.bullets.filter((bullet_) => bullet_ !== bullet);
-            this.monsters = this.monsters.filter(
-              (monster_) => monster_ !== monster
-            );
+            this.monsters = this.monsters.filter((monster_) => monster_ !== monster);
           }
         }
       });
 
       //monster => spaceship
-      if (
-        typeof monster !== "undefined" &&
-        typeof monster.elem !== "undefined"
-      ) {
+      if (typeof monster !== 'undefined' && typeof monster.elem !== 'undefined') {
         if (this.collisionAABB(this.spaceship, monster)) {
           // resetGame();
           new Boum(monster);
           monster.remove();
-          this.monsters = this.monsters.filter(
-            (monster_) => monster_ !== monster
-          );
+          this.monsters = this.monsters.filter((monster_) => monster_ !== monster);
           Hearts.looseOneHealth();
           return;
         }
@@ -369,10 +352,10 @@ export class App {
     this.monsterBombs.forEach((monsterBomb: MonsterBomb) => {
       this.bullets.forEach((bullet: Bullet) => {
         if (
-          typeof bullet !== "undefined" &&
-          typeof bullet.elem !== "undefined" &&
-          typeof monsterBomb !== "undefined" &&
-          typeof monsterBomb.elem !== "undefined"
+          typeof bullet !== 'undefined' &&
+          typeof bullet.elem !== 'undefined' &&
+          typeof monsterBomb !== 'undefined' &&
+          typeof monsterBomb.elem !== 'undefined'
         ) {
           if (this.collisionAABB(bullet, monsterBomb)) {
             (this.score.value as number) += monsterBomb.point;
@@ -380,25 +363,18 @@ export class App {
             bullet.remove();
             monsterBomb.remove();
             this.bullets = this.bullets.filter((bullet_) => bullet_ !== bullet);
-            this.monsterBombs = this.monsterBombs.filter(
-              (monsterBomb_) => monsterBomb_ !== monsterBomb
-            );
+            this.monsterBombs = this.monsterBombs.filter((monsterBomb_) => monsterBomb_ !== monsterBomb);
           }
         }
       });
       // monsterBomb => spachship
       this.monsterBombs.forEach((monsterBomb: MonsterBomb) => {
-        if (
-          typeof monsterBomb !== "undefined" &&
-          typeof monsterBomb.elem !== "undefined"
-        ) {
+        if (typeof monsterBomb !== 'undefined' && typeof monsterBomb.elem !== 'undefined') {
           if (this.collisionAABB(this.spaceship, monsterBomb)) {
             // resetGame();
             new Boum(monsterBomb);
             monsterBomb.remove();
-            this.monsterBombs = this.monsterBombs.filter(
-              (monsterBomb_) => monsterBomb_ !== monsterBomb
-            );
+            this.monsterBombs = this.monsterBombs.filter((monsterBomb_) => monsterBomb_ !== monsterBomb);
             Hearts.looseOneHealth();
             return;
           }
@@ -407,7 +383,7 @@ export class App {
     });
     //bonus => spaceship
     this.bonuss.forEach((bonus: Bonus) => {
-      if (typeof bonus !== "undefined" && typeof bonus.elem !== "undefined") {
+      if (typeof bonus !== 'undefined' && typeof bonus.elem !== 'undefined') {
         if (this.collisionAABB(this.spaceship, bonus)) {
           new Boum(bonus);
           Bonus.rasAllBonus();
@@ -422,7 +398,7 @@ export class App {
 
   public checkMonsterPosition(): void {
     this.monsters.forEach((monster: Monster) => {
-      if (typeof monster !== "undefined") {
+      if (typeof monster !== 'undefined') {
         if (monster.y > Monster.getMonsterBottomLimit()) {
           this.resetGame();
           return;
@@ -449,7 +425,7 @@ export class App {
   }
 
   public addEventListeners(): void {
-    window.addEventListener("keydown", (event) => {
+    window.addEventListener('keydown', (event) => {
       if (event.code === KEY_LEFT) {
         this.spaceship.moveLeft = true;
       }
@@ -476,7 +452,7 @@ export class App {
       }
     });
 
-    window.addEventListener("keyup", (event) => {
+    window.addEventListener('keyup', (event) => {
       if (event.code === KEY_LEFT) {
         this.spaceship.moveLeft = false;
       } //left
@@ -494,30 +470,30 @@ export class App {
       } //space
     });
 
-    this.buttonPause.elem?.addEventListener("click", () => {
+    this.buttonPause.elem?.addEventListener('click', () => {
       this.pauseGame();
     });
 
-    this.buttonStart.elem?.addEventListener("click", () => {
+    this.buttonStart.elem?.addEventListener('click', () => {
       this.startGame();
     });
 
-    this.buttonReStart.elem?.addEventListener("click", () => {
+    this.buttonReStart.elem?.addEventListener('click', () => {
       this.restartGame();
     });
 
-    this.buttonContinue.elem?.addEventListener("click", () => {
+    this.buttonContinue.elem?.addEventListener('click', () => {
       this.continueGame();
     });
 
-    this.buttonSound.elem?.addEventListener("click", () => {
+    this.buttonSound.elem?.addEventListener('click', () => {
       this.toggleSound();
     });
   }
 
   public removeAllBullets() {
     this.bullets.forEach((bullet) => {
-      if (typeof bullet !== "undefined" && typeof bullet.elem !== "undefined") {
+      if (typeof bullet !== 'undefined' && typeof bullet.elem !== 'undefined') {
         bullet.remove();
       }
     });
@@ -525,10 +501,7 @@ export class App {
 
   public removeAllMonsters() {
     this.monsters.forEach((monster: Monster) => {
-      if (
-        typeof monster !== "undefined" &&
-        typeof monster.elem !== "undefined"
-      ) {
+      if (typeof monster !== 'undefined' && typeof monster.elem !== 'undefined') {
         monster.remove();
       }
     });
@@ -536,10 +509,7 @@ export class App {
 
   public removeAllMonsterBombs() {
     this.monsterBombs.forEach((monsterBomb: MonsterBomb) => {
-      if (
-        typeof monsterBomb !== "undefined" &&
-        typeof monsterBomb.elem !== "undefined"
-      ) {
+      if (typeof monsterBomb !== 'undefined' && typeof monsterBomb.elem !== 'undefined') {
         monsterBomb.remove();
       }
     });
@@ -547,7 +517,7 @@ export class App {
 
   public removeAllBonuss() {
     this.bonuss.forEach((bonus: Bonus) => {
-      if (typeof bonus !== "undefined" && typeof bonus.elem !== "undefined") {
+      if (typeof bonus !== 'undefined' && typeof bonus.elem !== 'undefined') {
         bonus.remove();
       }
     });
@@ -590,12 +560,7 @@ export class App {
   }
 
   public checkWinState() {
-    if (
-      Array.isArray(this.monsters) &&
-      this.monsters.length === 0 &&
-      Array.isArray(this.monsterBombs) &&
-      this.monsterBombs.length === 0
-    ) {
+    if (Array.isArray(this.monsters) && this.monsters.length === 0 && Array.isArray(this.monsterBombs) && this.monsterBombs.length === 0) {
       this.removeAllBonuss();
       this.showElements([this.menu, this.win, this.buttonReStart]);
       this.hideElements([
@@ -616,12 +581,7 @@ export class App {
 
   public pauseGame() {
     this.pause = true;
-    this.showElements([
-      this.menu,
-      this.buttonContinue,
-      this.buttonReStart,
-      this.keyInfo,
-    ]);
+    this.showElements([this.menu, this.buttonContinue, this.buttonReStart, this.keyInfo]);
     this.hideElements([this.buttonStart, this.win, this.loose]);
     this.loop();
   }
@@ -629,14 +589,7 @@ export class App {
   public startGame() {
     this.pause = false;
     this.gameStarted = true;
-    this.showElements([
-      this.buttonPause,
-      this.buttonSoundContainer,
-      this.buttonContinue,
-      this.buttonReStart,
-      this.score,
-      this.health,
-    ]);
+    this.showElements([this.buttonPause, this.buttonSoundContainer, this.buttonContinue, this.buttonReStart, this.score, this.health]);
     this.hideElements([this.menu, this.keyInfo, this.buttonStart]);
     this.init();
   }
@@ -645,12 +598,7 @@ export class App {
     this.pause = false;
     this.resetGame();
     this.hideElements([this.menu]);
-    this.showElements([
-      this.buttonPause,
-      this.buttonSoundContainer,
-      this.score,
-      this.health,
-    ]);
+    this.showElements([this.buttonPause, this.buttonSoundContainer, this.score, this.health]);
     this.gameStarted = true;
     this.init();
   }
@@ -666,11 +614,11 @@ export class App {
   public toggleSound() {
     this.gameHasSound = !this.gameHasSound;
     if (this.gameHasSound) {
-      this.buttonSound.elem?.classList.remove("off");
-      this.buttonSound.elem?.classList.add("on");
+      this.buttonSound.elem?.classList.remove('off');
+      this.buttonSound.elem?.classList.add('on');
     } else {
-      this.buttonSound.elem?.classList.remove("on");
-      this.buttonSound.elem?.classList.add("off");
+      this.buttonSound.elem?.classList.remove('on');
+      this.buttonSound.elem?.classList.add('off');
     }
   }
 }

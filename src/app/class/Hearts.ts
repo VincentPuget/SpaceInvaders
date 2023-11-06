@@ -1,4 +1,4 @@
-import { DomElem } from "./DomElem";
+import { DomElem } from './DomElem';
 
 export interface Heart {
   elem: HTMLElement;
@@ -26,21 +26,20 @@ export class Hearts extends DomElem {
 
     for (var i = 0; i < MAX_HEALTH; i++) {
       let heart: Heart = {
-        elem: document.createElement("div"),
+        elem: document.createElement('div'),
         x: i * HEART_WIDTH + i * 10,
         y: 0,
         width: HEART_WIDTH,
         height: HEART_HEART,
       };
-      heart.elem.className = "heart";
-      heart.elem.style.width = heart.width + "px";
-      heart.elem.style.height = heart.height + "px";
+      heart.elem.className = 'heart';
+      heart.elem.style.width = heart.width + 'px';
+      heart.elem.style.height = heart.height + 'px';
 
-      let ref = document.querySelector(".health");
+      let ref = document.querySelector('.health');
       if (ref !== null && heart.elem !== null) {
         ref.appendChild(heart.elem);
-        heart.elem.style.transform =
-          "translate(" + heart.x + "px, " + heart.y + "px)";
+        heart.elem.style.transform = 'translate(' + heart.x + 'px, ' + heart.y + 'px)';
       }
 
       Hearts.hearts.push(heart);
@@ -68,16 +67,16 @@ export class Hearts extends DomElem {
   static display() {
     for (var i = 0; i < Hearts.hearts.length; i++) {
       if (i <= Hearts.healthNum - 1) {
-        Hearts.hearts[i].elem.classList.remove("lost");
+        Hearts.hearts[i].elem.classList.remove('lost');
       } else {
-        Hearts.hearts[i].elem.classList.add("lost");
+        Hearts.hearts[i].elem.classList.add('lost');
       }
     }
   }
 
   static removeAll() {
     Hearts.hearts.forEach((heart) => {
-      if (typeof heart !== "undefined" && typeof heart.elem !== "undefined") {
+      if (typeof heart !== 'undefined' && typeof heart.elem !== 'undefined') {
         heart.elem.remove();
         this.hearts = this.hearts.filter((heart_) => heart_ !== heart);
       }

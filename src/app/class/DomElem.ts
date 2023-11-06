@@ -6,7 +6,7 @@ export class DomElem {
   public height!: number;
   public speed!: number;
 
-  constructor(className: string = "") {}
+  constructor(className: string = '') {}
 
   move() {
     this.y += this.speed;

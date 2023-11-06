@@ -1,9 +1,9 @@
-import { BonusIcon } from "./BonusIcon";
-import { Bullet } from "./Bullet";
-import { DomElem } from "./DomElem";
-import { Hearts } from "./Hearts";
-import { Spaceship } from "./Spaceship";
-import { Utils } from "./Utils";
+import { BonusIcon } from './BonusIcon';
+import { Bullet } from './Bullet';
+import { DomElem } from './DomElem';
+import { Hearts } from './Hearts';
+import { Spaceship } from './Spaceship';
+import { Utils } from './Utils';
 
 export interface BonusConfig {
   name: string;
@@ -19,7 +19,7 @@ export const BONUS_SPEED: number = 1;
 export class Bonus extends DomElem {
   public static bonusAvailables: BonusConfig[] = [
     {
-      name: "bonusTripleFire",
+      name: 'bonusTripleFire',
       active: false,
       action: () => {
         let spaceship = Spaceship.get();
@@ -31,7 +31,7 @@ export class Bonus extends DomElem {
       },
     },
     {
-      name: "speedSpaceShip",
+      name: 'speedSpaceShip',
       active: false,
       action: () => {
         let spaceship = Spaceship.get();
@@ -43,7 +43,7 @@ export class Bonus extends DomElem {
       },
     },
     {
-      name: "bulletHz",
+      name: 'bulletHz',
       active: false,
       action: () => {
         Bullet.setHz(75);
@@ -53,7 +53,7 @@ export class Bonus extends DomElem {
       },
     },
     {
-      name: "newHealth",
+      name: 'newHealth',
       active: false,
       action: () => {
         Hearts.getOneHealth();
@@ -68,7 +68,7 @@ export class Bonus extends DomElem {
     super();
     let spaceship = Spaceship.get();
 
-    this.elem = document.createElement("div");
+    this.elem = document.createElement('div');
     this.x = Utils.getRandomInt(1, screen.width - BONUS_WIDTH);
     this.y = Utils.getRandomInt(0, 100);
     this.width = BONUS_WIDTH;
@@ -76,17 +76,13 @@ export class Bonus extends DomElem {
     this.speed = BONUS_SPEED;
     this.config = Bonus.getRandomBonusConfig();
 
-    this.elem.className = "bonus";
-    this.elem.style.width = this.width + "px";
-    this.elem.style.height = this.height + "px";
-    if (
-      spaceship !== null &&
-      spaceship.elem !== null &&
-      spaceship.elem.parentNode?.parentNode !== null
-    ) {
+    this.elem.className = 'bonus';
+    this.elem.style.width = this.width + 'px';
+    this.elem.style.height = this.height + 'px';
+    if (spaceship !== null && spaceship.elem !== null && spaceship.elem.parentNode?.parentNode !== null) {
       spaceship.elem.parentNode?.insertBefore(this.elem, spaceship.elem);
     }
-    this.elem.style.transform = "translate(" + this.x + "px, " + this.y + "px)";
+    this.elem.style.transform = 'translate(' + this.x + 'px, ' + this.y + 'px)';
     return this;
   }
 

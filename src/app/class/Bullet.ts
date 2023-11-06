@@ -1,5 +1,5 @@
-import { DomElem } from "./DomElem";
-import { Spaceship } from "./Spaceship";
+import { DomElem } from './DomElem';
+import { Spaceship } from './Spaceship';
 
 export const BULET_WIDTH: number = 2;
 export const BULLET_HEIGHT: number = 8;
@@ -12,42 +12,34 @@ export class Bullet extends DomElem {
   public positionY: number = 0;
   public spaceship: Spaceship = Spaceship.get();
 
-  constructor(position = "center") {
+  constructor(position = 'center') {
     super();
 
-    if (position === "left") {
+    if (position === 'left') {
       this.positionX = this.spaceship.x + this.spaceship.width / 2 - 1 - 14;
       this.positionY = this.spaceship.y - BULLET_HEIGHT + 20;
-    } else if (position === "center") {
+    } else if (position === 'center') {
       this.positionX = this.spaceship.x + this.spaceship.width / 2 - 1;
       this.positionY = this.spaceship.y - BULLET_HEIGHT;
-    } else if (position === "right") {
+    } else if (position === 'right') {
       this.positionX = this.spaceship.x + this.spaceship.width / 2 - 1 + 14;
       this.positionY = this.spaceship.y - BULLET_HEIGHT + 20;
     }
 
-    this.elem = document.createElement("div");
+    this.elem = document.createElement('div');
     this.x = this.positionX;
     this.y = this.positionY;
     this.width = BULET_WIDTH;
     this.height = BULLET_HEIGHT;
     this.speed = Bullet.bulletSpeed;
 
-    this.elem.className = "bullet";
-    this.elem.style.width = this.width + "px";
-    this.elem.style.height = this.height + "px";
-    this.elem.style.background = "white";
+    this.elem.className = 'bullet';
+    this.elem.style.width = this.width + 'px';
+    this.elem.style.height = this.height + 'px';
+    this.elem.style.background = 'white';
 
-    if (
-      this.spaceship !== null &&
-      this.spaceship.elem !== null &&
-      this.spaceship.elem.parentNode !== null &&
-      this.elem !== null
-    ) {
-      this.spaceship.elem.parentNode.insertBefore(
-        this.elem,
-        this.spaceship.elem
-      );
+    if (this.spaceship !== null && this.spaceship.elem !== null && this.spaceship.elem.parentNode !== null && this.elem !== null) {
+      this.spaceship.elem.parentNode.insertBefore(this.elem, this.spaceship.elem);
     }
 
     return this;

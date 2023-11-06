@@ -1,10 +1,10 @@
-import { DomElem } from "./DomElem";
+import { DomElem } from './DomElem';
 
 export class Screen extends DomElem {
   public static screen: Screen;
   constructor() {
     super();
-    const screen: HTMLElement | null = document.querySelector(".screen");
+    const screen: HTMLElement | null = document.querySelector('.screen');
     if (screen) {
       this.elem = screen;
     }
