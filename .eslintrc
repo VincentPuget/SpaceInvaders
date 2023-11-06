@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*", "webpack.config.js"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"]
+      },
+      "extends": ["plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
+      "rules": {
+        "@typescript-eslint/no-inferrable-types": 0,
+        "@angular-eslint/no-host-metadata-property": 0
+      }
+    }
+  ]
+}
