@@ -149,15 +149,15 @@ export class App {
   }
 
   public chooseMonsterForBombing(): void {
-    let rand = Utils.getRandomInt(1, 1000);
+    const rand: number = Utils.getRandomInt(1, 1000);
     if (rand < 10) {
-      let randMonster = Utils.getRandomInt(1, this.monsters.length - 1);
+      const randMonster: number = Utils.getRandomInt(1, this.monsters.length - 1);
       this.createMonsterBomb(this.monsters[randMonster]);
     }
   }
 
   public randomBonus(): void {
-    let rand = Utils.getRandomInt(1, 1000);
+    const rand: number = Utils.getRandomInt(1, 1000);
     if (rand < 10 && this.bonuss.length < 2) {
       this.createBonus();
     }
@@ -199,7 +199,7 @@ export class App {
 
   public spaceshipFire(): void {
     if (this.spaceship.fire && this.bulletTimeout === null) {
-      let bullet = new Bullet('center');
+      const bullet: Bullet = new Bullet('center');
       this.bullets.push(bullet);
 
       if (this.gameHasSound) {
@@ -207,10 +207,10 @@ export class App {
       }
 
       if (this.spaceship.tripleFire) {
-        let bulletLeft = new Bullet('left');
+        const bulletLeft: Bullet = new Bullet('left');
         this.bullets.push(bulletLeft);
 
-        let bulletRight = new Bullet('right');
+        const bulletRight: Bullet = new Bullet('right');
         this.bullets.push(bulletRight);
       }
       this.bulletTimeout = setTimeout(() => {
@@ -224,7 +224,7 @@ export class App {
     this.monsters = [];
     for (let i = 0; i < Monster.getLineOfMonster(); i++) {
       for (let j = 0; j < Monster.getMonstersByLine(); j++) {
-        let monster = new Monster(i, j);
+        const monster: Monster = new Monster(i, j);
         this.monsters.push(monster);
       }
     }
@@ -234,7 +234,7 @@ export class App {
     if (typeof monster === 'undefined') {
       return;
     }
-    let monsterBomb = new MonsterBomb(monster);
+    const monsterBomb: MonsterBomb = new MonsterBomb(monster);
     this.monsterBombs.push(monsterBomb);
   }
 
@@ -242,7 +242,7 @@ export class App {
     if (!this.gameStarted) {
       return;
     }
-    let bonus = new Bonus();
+    const bonus: Bonus = new Bonus();
     this.bonuss.push(bonus);
   }
 
