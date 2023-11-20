@@ -203,7 +203,7 @@ export class App {
       this.bullets.push(bullet);
 
       if (this.gameHasSound) {
-        this.sound.play('laser');
+        this.sound.playLaser();
       }
 
       if (this.spaceship.tripleFire) {
@@ -572,7 +572,10 @@ export class App {
         this.buttonContinue,
         this.buttonPause,
         this.buttonSoundContainer,
+        this.spaceship,
       ]);
+      this.pause = true;
+      this.removeAllBullets();
       Bonus.rasAllBonus();
       BonusIcon.reset();
       this.gameStarted = false;

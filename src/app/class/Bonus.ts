@@ -22,11 +22,11 @@ export class Bonus extends DomElem {
       name: 'bonusTripleFire',
       active: false,
       action: () => {
-        let spaceship = Spaceship.get();
+        const spaceship = Spaceship.get();
         spaceship.tripleFire = true;
       },
       default: () => {
-        let spaceship = Spaceship.get();
+        const spaceship = Spaceship.get();
         spaceship.tripleFire = false;
       },
     },
@@ -34,11 +34,11 @@ export class Bonus extends DomElem {
       name: 'speedSpaceShip',
       active: false,
       action: () => {
-        let spaceship = Spaceship.get();
+        const spaceship = Spaceship.get();
         spaceship.speed = 9;
       },
       default: () => {
-        let spaceship = Spaceship.get();
+        const spaceship = Spaceship.get();
         spaceship.speed = 6;
       },
     },
@@ -66,7 +66,7 @@ export class Bonus extends DomElem {
 
   constructor() {
     super();
-    let spaceship = Spaceship.get();
+    const spaceship = Spaceship.get();
 
     this.elem = document.createElement('div');
     this.x = Utils.getRandomInt(1, screen.width - BONUS_WIDTH);
@@ -92,7 +92,7 @@ export class Bonus extends DomElem {
   }
 
   public static getRandomBonusConfig(): BonusConfig {
-    let randBonus = Utils.getRandomInt(0, Bonus.bonusAvailables.length - 1);
+    const randBonus = Utils.getRandomInt(0, Bonus.bonusAvailables.length - 1);
     Bonus.bonusAvailables[randBonus].active = true;
     return Bonus.bonusAvailables[randBonus];
   }

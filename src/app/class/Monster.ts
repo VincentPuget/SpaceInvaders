@@ -42,7 +42,7 @@ export class Monster extends DomElem {
 
   constructor(i: number, j: number) {
     super();
-    let spaceship = Spaceship.get();
+    const spaceship = Spaceship.get();
     if (i === 0) {
       this.monster = Monster.monster1;
     } else if (i === 1) {
@@ -52,10 +52,10 @@ export class Monster extends DomElem {
     }
 
     this.elem = document.createElement('div');
-    let paddingX = i === 0 ? 14 : i === 1 ? 30 : 10;
-    let paddingY = 10;
-    let paddingXall = 20;
-    let paddingYall = 60;
+    const paddingX = i === 0 ? 14 : i === 1 ? 30 : 10;
+    const paddingY = 10;
+    const paddingXall = 20;
+    const paddingYall = 60;
     this.x = j * this.monster.width + j * paddingX + paddingX / 2 + paddingXall;
     this.y = i * this.monster.height + i * paddingY + paddingYall;
     this.width = this.monster.width;
@@ -73,18 +73,18 @@ export class Monster extends DomElem {
   }
 
   static getMonsterBottomLimit(): number {
-    let screen: Screen = Screen.get();
+    const screen: Screen = Screen.get();
     return screen.height - 5;
   }
 
   static getMonstersByLine(): number {
-    let screen: Screen = Screen.get();
-    let monstersByLine1: number = Math.round(screen.width / (Monster.monster1.width + SPACE_ARROUND_MONSTERS)) - 1;
-    let monstersByLine2: number = Math.round(screen.width / (Monster.monster2.width + SPACE_ARROUND_MONSTERS)) - 1;
-    let monstersByLine3: number = Math.round(screen.width / (Monster.monster3.width + SPACE_ARROUND_MONSTERS)) - 1;
+    const screen: Screen = Screen.get();
+    const monstersByLine1: number = Math.round(screen.width / (Monster.monster1.width + SPACE_ARROUND_MONSTERS)) - 1;
+    const monstersByLine2: number = Math.round(screen.width / (Monster.monster2.width + SPACE_ARROUND_MONSTERS)) - 1;
+    const monstersByLine3: number = Math.round(screen.width / (Monster.monster3.width + SPACE_ARROUND_MONSTERS)) - 1;
 
-    let monstersByLine12: number = Math.min(monstersByLine1, monstersByLine2);
-    let monstersByLine: number = Math.min(monstersByLine12, monstersByLine3);
+    const monstersByLine12: number = Math.min(monstersByLine1, monstersByLine2);
+    const monstersByLine: number = Math.min(monstersByLine12, monstersByLine3);
     return monstersByLine;
   }
 

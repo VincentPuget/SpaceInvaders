@@ -22,7 +22,7 @@ export class Spaceship extends DomElem {
     if (elem) {
       this.elem = elem;
     }
-    let screen: Screen = Screen.get();
+    const screen: Screen = Screen.get();
     this.x = (screen.width - SPACESHIP_WIDTH) / 2;
     this.x = (screen.width - SPACESHIP_WIDTH) / 2;
     this.y = screen.height - SPACESHIP_HEIGHT - 4;
@@ -53,13 +53,13 @@ export class Spaceship extends DomElem {
   }
 
   replaceInScreen(): void {
-    let screen: Screen = Screen.get();
+    const screen: Screen = Screen.get();
     this.x = (screen.width - this.width) / 2;
     this.y = screen.height - this.height - 4;
   }
 
   contain(): void {
-    let screen: Screen = Screen.get();
+    const screen: Screen = Screen.get();
     this.x = Math.max(0, this.x); // débordement à gauche (this.x devient négatif)
     this.x = Math.min(screen.width - this.width, this.x); // débordement à droite
 

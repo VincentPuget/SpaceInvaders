@@ -1,14 +1,14 @@
 import piou from '../../assets/sounds/piou.mp3';
 
 export class Sound {
-  public laser: any;
+  public laser: { ready: boolean; audio: HTMLAudioElement | undefined } = { ready: false, audio: undefined };
   constructor() {
     this.initLaser();
     return this;
   }
 
   initLaser(): void {
-    this.laser = {};
+    this.laser = { ready: false, audio: undefined };
     this.laser.ready = false;
     this.laser.audio = new Audio(piou);
     this.laser.audio.addEventListener('canplaythrough', () => {
@@ -16,11 +16,11 @@ export class Sound {
     });
   }
 
-  play(key: string) {
-    if ((this as any)[key].ready) {
-      (this as any)[key].audio.pause();
-      (this as any)[key].audio.currentTime = 0;
-      (this as any)[key].audio.play();
+  playLaser() {
+    if (this.laser && this.laser.ready && this.laser.audio) {
+      this.laser.audio.pause();
+      this.laser.audio.currentTime = 0;
+      this.laser.audio.play();
     }
   }
 }

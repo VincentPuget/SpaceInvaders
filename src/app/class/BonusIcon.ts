@@ -18,14 +18,14 @@ export class BonusIcon extends DomElem {
 
     this.elem.classList.add(iconClassName);
 
-    let ref = document.querySelector('.bonusIconsContainer');
+    const ref = document.querySelector('.bonusIconsContainer');
     if (ref !== null && this.elem !== null) {
       ref.appendChild(this.elem);
     }
   }
 
   static reset(): void {
-    let ref: Element | null = document.querySelector('.bonusIconsContainer');
+    const ref: Element | null = document.querySelector('.bonusIconsContainer');
     while (ref?.firstChild) {
       ref.removeChild(ref.firstChild);
     }

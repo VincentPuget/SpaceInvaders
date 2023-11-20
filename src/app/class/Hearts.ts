@@ -24,8 +24,8 @@ export class Hearts extends DomElem {
   createHeart() {
     Hearts.healthNum = 3;
 
-    for (var i = 0; i < MAX_HEALTH; i++) {
-      let heart: Heart = {
+    for (let i = 0; i < MAX_HEALTH; i++) {
+      const heart: Heart = {
         elem: document.createElement('div'),
         x: i * HEART_WIDTH + i * 10,
         y: 0,
@@ -36,7 +36,7 @@ export class Hearts extends DomElem {
       heart.elem.style.width = heart.width + 'px';
       heart.elem.style.height = heart.height + 'px';
 
-      let ref = document.querySelector('.health');
+      const ref = document.querySelector('.health');
       if (ref !== null && heart.elem !== null) {
         ref.appendChild(heart.elem);
         heart.elem.style.transform = 'translate(' + heart.x + 'px, ' + heart.y + 'px)';
@@ -65,7 +65,7 @@ export class Hearts extends DomElem {
   }
 
   static display() {
-    for (var i = 0; i < Hearts.hearts.length; i++) {
+    for (let i = 0; i < Hearts.hearts.length; i++) {
       if (i <= Hearts.healthNum - 1) {
         Hearts.hearts[i].elem.classList.remove('lost');
       } else {
